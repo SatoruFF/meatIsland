@@ -1,33 +1,18 @@
+import { Routes, Route } from "react-router-dom";
+import Catalog from "../features/Catalog";
+import Home from "../features/Home";
+
+import routes from "../shared/utils/routes";
+
 import "../styles/App.css";
 
 function App() {
   return (
     <>
-      <h3>Описание структуры</h3>
-      <ul>
-        <li>
-          <strong>app:</strong> Основные файлы приложения, включая входную точку
-          и маршруты.
-        </li>
-        <li>
-          <strong>features:</strong> Каждая функциональность (например, главная
-          страница, каталог продуктов) имеет свою папку. Это позволяет легко
-          управлять компонентами, хуками и типами, относящимися к конкретной
-          функции.
-        </li>
-        <li>
-          <strong>shared:</strong> Общие компоненты, хуки и утилиты, которые
-          могут использоваться в разных частях приложения.
-        </li>
-        <li>
-          <strong>assets:</strong> Статические ресурсы, такие как изображения и
-          шрифты.
-        </li>
-        <li>
-          <strong>styles:</strong> Глобальные стили и переменные для стилизации
-          всего приложения.
-        </li>
-      </ul>
+      <Routes>
+        <Route path={routes.home} element={<Home />} />
+        <Route path={routes.catalog} element={<Catalog />} />
+      </Routes>
     </>
   );
 }

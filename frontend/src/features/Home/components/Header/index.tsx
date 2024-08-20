@@ -1,4 +1,4 @@
-import Logo from "./HomeMenu/Logo";
+import Logo from "../../../../shared/components/Logo";
 import TabsMenu from "./HomeMenu/TabsMenu";
 
 import styles from "./styles.module.less";

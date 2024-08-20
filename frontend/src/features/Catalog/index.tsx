@@ -1,14 +1,14 @@
-import Body from "./components/Body/index";
+import CatalogBody from "./components/Body/index";
 import Footer from "./components/Footer/index";
 import Header from "./components/Header/index";
 
+import styles from "./stylesCatalog.module.less";
+
 export default function Catalog() {
   return (
-    <div>
-      <h1>Welcome to my Catalog</h1>
+    <div className={styles.conteinerCatalog}>
       <Header />
-      <Body />
-      <Footer />
+      <CatalogBody />
     </div>
   );
 }

@@ -1,4 +1,4 @@
-import styles from "../styles.module.less";
+import styles from "./styles.module.less";
 
 const Logo = () => {
   return (

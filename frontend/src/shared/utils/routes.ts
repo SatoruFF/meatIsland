@@ -1,6 +1,7 @@
 const routes = {
   home: "/",
-  catalog: "/catalog",
+  catalogs: "/catalogs/*",
+  category: ":id",
 };
 
 export default routes;

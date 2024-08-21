@@ -1,11 +1,18 @@
-.catalogBody{
+.catalog{
+    display: flex;
     padding-top: 40px;
+}
+
+.categoryContainer{
+    flex: 1 1 0;
+    overflow: hidden;
 }
 
 .gridContainer {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-  gap: 16px;
+  gap: 20px;
+  padding: 15px;
 }
 
 .item {
@@ -15,14 +22,14 @@
   border-radius: 8px;
   overflow: hidden;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  padding: 16px;
+  padding: 15px;
   transition: transform 0.3s ease, box-shadow 0.3s ease;
   height: 100%;
 }
 
 .item:hover {
   transform: translateY(-8px);
-  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
 }
 
 .imageItem {
@@ -70,4 +77,92 @@
     background-color: #DC143C;
     color: #fff;
 
+}
+
+// Basket
+
+.basket{
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    padding: 15px;
+    height: fit-content;
+    max-width: 400px;
+    min-width: 300px;
+    flex-shrink: 0;
+    margin-right: 30px;
+    margin-top: 15px;
+}
+
+
+.basketHeader{
+    display: flex;
+    justify-content: space-between;
+    padding-bottom: 10px;
+}
+
+.countBasket{
+    text-align: center;
+    background-color: #f2f2f2;
+    border-radius: 8px;
+    padding: 2px 15px;
+    font-size: 14px;
+}
+
+.basketItem {
+  display: flex;
+  align-items: center;
+  padding: 5px 0;
+  border-top: 1px solid #f2f2f2;
+
+  &:last-child {
+    border-bottom: 1px solid #f2f2f2;
+  }
+}
+
+.imageBasketItem {
+  width: 55px;
+  height: 55px;
+  margin-right: 16px;
+  object-fit: cover;
+  border-radius: 8px;
+}
+
+.itemDetails {
+  flex: 1;
+}
+
+.itemDetails p {
+  margin: 0;
+  font-size: 11px;
+  color: #888
+}
+
+.itemCount {
+  display: flex;
+  align-items: center;
+  margin-left: 16px;
+  background-color: #f2f2f2;
+  border-radius: 8px;
+  padding: 5px;
+}
+
+.itemCount p {
+  margin: 0 8px;
+  cursor: pointer;
+}
+
+.addBasket{
+    text-align: center;
+    background-color: #DC143C;
+    color: #fff;
+    border-radius: 8px;
+    padding: 5px;
+}
+
+
+.sum{
+    display: flex;
+    justify-content: space-between;
+    padding: 10px 2px;
 }

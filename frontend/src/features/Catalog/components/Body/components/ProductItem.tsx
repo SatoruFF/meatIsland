@@ -1,5 +1,5 @@
 import _ from "lodash";
-import styles from "./stylesBody.module.less";
+import styles from "../stylesBody.module.less";
 
 const ProductItem = () => {
   interface Item {

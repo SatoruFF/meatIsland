@@ -4,7 +4,7 @@ import Header from "./components/Header/index";
 
 import styles from "./stylesCatalog.module.less";
 
-export default function Catalog() {
+export default function CatalogPage() {
   return (
     <div className={styles.conteinerCatalog}>
       <Header />

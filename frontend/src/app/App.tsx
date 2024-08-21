@@ -1,7 +1,7 @@
 import { Routes, Route } from "react-router-dom";
 
-import Catalog from "../features/Catalog";
-import Home from "../features/Home";
+import CatalogPage from "../features/Catalog";
+import HomePage from "../features/Home";
 
 import routes from "../shared/utils/routes";
 
@@ -12,8 +12,8 @@ function App() {
   return (
     <>
       <Routes>
-        <Route path={routes.home} element={<Home />} />
-        <Route path={routes.catalogs} element={<Catalog />} />
+        <Route path={routes.home} element={<HomePage />} />
+        <Route path={routes.catalogs} element={<CatalogPage />} />
       </Routes>
     </>
   );

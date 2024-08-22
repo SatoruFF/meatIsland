@@ -1,0 +1,92 @@
+/* Сброс основных стилей */
+*,
+*:before,
+*:after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+/* Убираем стандартные стили для списков */
+ul,
+ol {
+    list-style: none;
+}
+
+/* Убираем стандартные стили для таблиц */
+table {
+    border-collapse: collapse;
+    border-spacing: 0;
+}
+
+/* Убираем стандартные стили для изображений */
+img {
+    max-width: 100%;
+    height: auto;
+}
+
+/* Убираем стандартные стили для ссылок */
+a {
+    text-decoration: none;
+    color: inherit; /* Унаследовать цвет текста */
+}
+
+/* Устанавливаем базовые шрифты и размеры */
+body {
+    font-family: Arial, sans-serif; /* Замените на нужный шрифт */
+    line-height: 1.5;
+}
+
+/* Устанавливаем базовые размеры для заголовков */
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    font-weight: normal; /* Сбрасываем жирность шрифта */
+}
+
+/* Устанавливаем отступы для заголовков */
+h1 {
+    font-size: 2em;
+}
+h2 {
+    font-size: 1.5em;
+}
+h3 {
+    font-size: 1.17em;
+}
+h4 {
+    font-size: 1em;
+}
+h5 {
+    font-size: 0.83em;
+}
+h6 {
+    font-size: 0.67em;
+}
+
+/* Сбросим стили для кнопок */
+button {
+    background: none;
+    border: none;
+    padding: 0;
+    cursor: pointer;
+}
+
+/* Сбросим стили для форм */
+input,
+textarea,
+select {
+    font-family: inherit; /* Унаследуем шрифт */
+}
+
+/* Применяем базовые стили к формам */
+input[type="text"],
+input[type="email"],
+input[type="password"],
+textarea {
+    border: 1px solid #ccc; /* Задаем границу по умолчанию */
+    border-radius: 4px; /* Закругляем углы */
+}

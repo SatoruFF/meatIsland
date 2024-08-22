@@ -10,7 +10,7 @@ const ProductItem = () => {
     weight: string;
   }
 
-  const items: { [key: number]: Item } = {
+  const mockItems: { [key: number]: Item } = {
     1: {
       title: "Мясо",
       id: "1",
@@ -70,7 +70,7 @@ const ProductItem = () => {
 
   return (
     <div className={styles.gridContainer}>
-      {_.map(items, (item) => {
+      {_.map(mockItems, (item) => {
         return (
           <div key={item.id} className={styles.item}>
             <img

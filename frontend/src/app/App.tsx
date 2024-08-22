@@ -1,21 +1,18 @@
-import { Routes, Route } from "react-router-dom";
+import { BrowserRouter } from "react-router-dom";
+import cn from "classnames";
 
-import CatalogPage from "../features/Catalog";
-import HomePage from "../features/Home";
-
-import routes from "../shared/utils/routes";
-
-import "../styles/App.css";
-import CategoryContainer from "../features/Catalog/components/Body/CategoryContainer";
+import AppRouter from "./AppRouter";
+import Navbar from "../features/Catalog/components/Body/components/Navbar";
+import resetStyles from "../styles/reset.module.less";
 
 function App() {
   return (
-    <>
-      <Routes>
-        <Route path={routes.home} element={<HomePage />} />
-        <Route path={routes.catalogs} element={<CatalogPage />} />
-      </Routes>
-    </>
+    <div className={cn(resetStyles)}>
+      <BrowserRouter>
+        <Navbar />
+        <AppRouter />
+      </BrowserRouter>
+    </div>
   );
 }
 

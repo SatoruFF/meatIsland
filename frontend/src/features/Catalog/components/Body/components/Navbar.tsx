@@ -1,5 +1,7 @@
+import Header from "../../../../Home/components/Header";
+
 const Navbar = () => {
-  return <></>;
+  return <Header />;
 };
 
 export default Navbar;

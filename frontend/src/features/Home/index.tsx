@@ -9,15 +9,8 @@ export default function HomePage() {
   return (
     <>
       <div className={styles.HeaderHome}>
-        <Header />
         <MainCard />
       </div>
-      {/* <div className={styles.BodyHome}>
-        <Body />
-      </div>
-      <div className={styles.FooterHome}>
-        <Footer />
-      </div> */}
     </>
   );
 }

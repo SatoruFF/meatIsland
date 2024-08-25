@@ -1,4 +1,3 @@
-import { useParams } from "react-router-dom";
 import ProductItem from "./ProductItem";
 
 const CategoryContainer = () => {

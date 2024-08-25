@@ -2,7 +2,7 @@ import { Routes, Route } from "react-router-dom";
 
 import CategoryContainer from "./components/CategoryContainer";
 
-import routes from "../../../../shared/utils/routes";
+import { PATHS } from "../../../../constants/paths";
 
 import styles from "./stylesBody.module.less";
 import Basket from "./components/Basket";
@@ -13,7 +13,7 @@ const CatalogBody = () => {
       <Basket />
       <div className={styles.categoryContainer}>
         <Routes>
-          <Route path={routes.category} element={<CategoryContainer />} />
+          <Route path={PATHS.CATALOG_ITEM_PATH} element={<CategoryContainer />} />
         </Routes>
       </div>
     </div>

@@ -15,7 +15,7 @@ export const privateRoutes: IRoutes = [
     element: HomePage,
   },
   {
-    path: PATHS.CATALOGS_PATH,
+    path: PATHS.CATALOG_PATH,
     element: CatalogPage,
   },
 ];

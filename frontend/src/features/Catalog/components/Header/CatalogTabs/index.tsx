@@ -1,8 +1,7 @@
 import { useState, useEffect } from "react";
-import _ from "lodash";
 import { useNavigate, useLocation } from "react-router-dom";
-
-import routes from "../../../../../shared/utils/routes";
+import _ from "lodash";
+import { PATHS } from "../../../../../constants/paths";
 
 import styles from "../styles.module.less";
 
@@ -38,7 +37,7 @@ const CatalogTabs = () => {
 
   const handleTabClick = (id: string) => {
     setActiveTab(id);
-    const path = routes.category.replace(":id", id);
+    const path = PATHS.CATALOG_ITEM_PATH.replace(":id", id);
     navigate(path);
   };
 

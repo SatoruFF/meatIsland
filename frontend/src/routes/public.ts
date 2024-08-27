@@ -1,6 +1,9 @@
 import { PATHS } from "../constants/paths";
 import CatalogPage from "../features/Catalog";
+import Certificates from "../features/Certificates/Certificates";
+import Contacts from "../features/Contacts/Contacts";
 import HomePage from "../features/Home";
+import Reviews from "../features/Reviews/Review";
 
 interface IRoute {
   path: string;
@@ -17,5 +20,17 @@ export const publicRoutes: IRoutes = [
   {
     path: PATHS.CATALOG_PATH,
     element: CatalogPage,
+  },
+  {
+    path: PATHS.REVIEWS,
+    element: Reviews,
+  },
+  {
+    path: PATHS.CERTIFICATES,
+    element: Certificates,
+  },
+  {
+    path: PATHS.CONTACTS,
+    element: Contacts,
   },
 ];

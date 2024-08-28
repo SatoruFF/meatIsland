@@ -5,7 +5,7 @@ import CatalogTabs from "./CatalogTabs";
 
 const Header = () => {
   return (
-    <div>
+    <div className={styles.headerContainer}>
       <div className={styles.containerLogo}>
         <Logo />
       </div>

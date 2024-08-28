@@ -1,12 +1,15 @@
 // header
 .containerHeader {
   width: 100%;
-  height: 6vh;
   display: flex;
   align-items: center;
   justify-content: space-between;
   box-sizing: border-box;
-  padding: 20px 60px;
+  position: fixed;
+  top: 20px;
+  width: 100%;
+  padding: 0 40px; /* Отступы слева и справа по 20px */
+  box-sizing: border-box;
 }
 
 // TabsMenu
@@ -14,11 +17,11 @@
   display: flex;
   flex-direction: row;
   gap: 20px;
+  color: #fff;
 }
 
 // Items
 .navigateItem:hover {
-  text-decoration: underline;
-  color: #ff4d4f;
+  color: #DC143C;
   cursor: pointer;
 }

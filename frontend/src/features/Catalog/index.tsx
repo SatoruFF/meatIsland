@@ -1,5 +1,4 @@
 import CatalogBody from "./components/Body/index";
-import CategoryList from "./components/Body/index";
 import Footer from "./components/Footer/index";
 import Header from "./components/Header/index";
 
@@ -10,6 +9,7 @@ export default function CatalogPage() {
     <div className={styles.conteinerCatalog}>
       <Header />
       <CatalogBody />
+      <Footer />
     </div>
   );
 }

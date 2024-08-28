@@ -8,11 +8,9 @@ import Navbar from "../Catalog/components/Body/components/Navbar";
 
 export default function HomePage() {
   return (
-    <>
+    <div className={styles.mainPage}>
       <Navbar />
-      <div className={styles.HeaderHome}>
-        <MainCard />
-      </div>
-    </>
+      <MainCard />
+    </div>
   );
 }

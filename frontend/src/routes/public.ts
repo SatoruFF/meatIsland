@@ -1,8 +1,8 @@
 import { PATHS } from "../constants/paths";
-import Certificates from "../features/Certificates/Certificates";
-import Contacts from "../features/Contacts/Contacts";
+import Certificates from "../features/Home/components/Certificates/Certificates";
+import Contacts from "../features/Home/components/Contacts/Contacts";
 import HomePage from "../features/Home";
-import Reviews from "../features/Reviews/Review";
+import Reviews from "../features/Home/components/Reviews/Review";
 
 interface IRoute {
   path: string;

@@ -1,8 +1,11 @@
-import { Routes, Route, Navigate, BrowserRouter } from "react-router-dom";
+import { Routes, Route, Navigate } from "react-router-dom";
 
 import { PATHS } from "../constants/paths";
 import { publicRoutes } from "../routes/public";
 import { privateRoutes } from "../routes/private";
+import CatalogPage from "../features/Catalog";
+import CategoryContainer from "../features/Catalog/components/Body/components/CategoryContainer";
+import React from "react";
 
 const AppRouter = () => {
   const isAuth = true; // need to implement auth in future
@@ -15,7 +18,7 @@ const AppRouter = () => {
             <Route
               key={item.path}
               path={item.path}
-              element={<item.element />}
+              element={React.createElement(item.element)} // Правильный синтаксис
             />
           ))}
         </>
@@ -25,11 +28,14 @@ const AppRouter = () => {
             <Route
               key={item.path}
               path={item.path}
-              element={<item.element />}
+              element={React.createElement(item.element)} // Правильный синтаксис
             />
           ))}
         </>
       )}
+      <Route path={PATHS.CATALOG_PATH} element={<CatalogPage />}>
+        <Route path=":id" element={<CategoryContainer />} />
+      </Route>
       <Route path="/*" element={<Navigate replace to={PATHS.WELCOME_PATH} />} />
     </Routes>
   );

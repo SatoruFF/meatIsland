@@ -1,5 +1,4 @@
 import { PATHS } from "../constants/paths";
-import CatalogPage from "../features/Catalog";
 import Certificates from "../features/Certificates/Certificates";
 import Contacts from "../features/Contacts/Contacts";
 import HomePage from "../features/Home";
@@ -16,10 +15,6 @@ export const publicRoutes: IRoutes = [
   {
     path: PATHS.WELCOME_PATH,
     element: HomePage,
-  },
-  {
-    path: PATHS.CATALOG_PATH,
-    element: CatalogPage,
   },
   {
     path: PATHS.REVIEWS,

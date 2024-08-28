@@ -27,6 +27,14 @@ const CatalogTabs = () => {
   };
 
   useEffect(() => {
+    if (location.pathname === PATHS.CATALOG_PATH) {
+      const firstKey: any = Object.keys(tabsMenu)[0];
+      const firstCategory = tabsMenu[firstKey];
+      handleTabClick(firstCategory.id);
+    }
+  }, []);
+
+  useEffect(() => {
     const currentTab = Object.values(tabsMenu).find((tab) =>
       location.pathname.includes(tab.id)
     );
@@ -37,7 +45,7 @@ const CatalogTabs = () => {
 
   const handleTabClick = (id: string) => {
     setActiveTab(id);
-    const path = PATHS.CATALOG_ITEM_PATH.replace(":id", id);
+    const path = PATHS.CATALOG_PATH_ID.replace(":id", id);
     navigate(path);
   };
 

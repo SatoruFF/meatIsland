@@ -1,6 +1,9 @@
 .catalog{
     display: flex;
     padding-top: 40px;
+    @media (max-width: 960px) {
+      display: block;
+    }
 }
 
 .categoryContainer{
@@ -80,6 +83,9 @@
 }
 
 // Basket
+.basketContainer{
+    padding: 15px;
+}
 
 .basket{
     background-color: #fff;
@@ -89,9 +95,10 @@
     height: fit-content;
     max-width: 400px;
     min-width: 300px;
-    flex-shrink: 0;
     margin-right: 30px;
-    margin-top: 15px;
+    @media (max-width: 960px) {
+      min-width: 100%;
+    }
 }
 
 

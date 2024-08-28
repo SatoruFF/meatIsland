@@ -1,4 +1,3 @@
-import Basket from "./components/Body/Basket";
 import CatalogBody from "./components/Body/index";
 import CategoryList from "./components/Body/index";
 import Footer from "./components/Footer/index";

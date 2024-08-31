@@ -1,16 +1,23 @@
-import Body from "./components/Body/index";
-import Footer from "./components/Footer/index";
 import MainCard from "./components/MainCard";
-import Header from "./components/Header/index";
+import Navbar from "../Catalog/components/Body/components/Navbar";
 
 import styles from "./style.module.less";
-import Navbar from "../Catalog/components/Body/components/Navbar";
+import Reviews from "./components/Reviews/Review";
+import Contacts from "./components/Contacts/Contacts";
 
 export default function HomePage() {
   return (
-    <div className={styles.mainPage}>
-      <Navbar />
-      <MainCard />
+    <div>
+      <div className={styles.mainPage}>
+        <Navbar />
+        <MainCard />
+      </div>
+      <div className={styles.reviews}>
+        <Reviews />
+      </div>
+      <div className={styles.contacts}>
+        <Contacts />
+      </div>
     </div>
   );
 }

@@ -2,14 +2,12 @@ import React from "react";
 import styles from "./style.module.less";
 import cn from "classnames";
 import { Typography } from "antd";
-import Navbar from "../../../Catalog/components/Body/components/Navbar";
 
 const { Title, Text } = Typography;
 
 const Contacts = () => {
   return (
     <>
-      <Navbar />
       <div className={cn(styles["contacts-wrapper"])}>
         <div className={cn(styles["contacts-title"])}>
           Заинтересовала наша продукция? Свяжитесь: +7 937 615-26-44.
@@ -55,7 +53,9 @@ const Contacts = () => {
               </div>
               <div className={cn(styles["contacts__right-side-map"])}>
                 <iframe
-                  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2241.199436112049!2d49.1293348764855!3d55.82449758646711!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x415ead55f41ae78f%3A0x6d2436e4a1640707!2z0YPQuy4g0KTQsNGC0YvRhdCwINCQ0LzQuNGA0YXQsNC90LAsIDIxLCDQmtCw0LfQsNC90YwsINCg0LXRgdC_LiDQotCw0YLQsNGA0YHRgtCw0L0sIDQyMDEyNg!5e0!3m2!1sru!2sru!4v1724789411293!5m2!1sru!2sru"
+                  src="https://yandex.ru/map-widget/v1/?um=constructor%3A7a64fc5fe991ec44ce63fa8e6cfb0ea07a64e4e2a76847f075e5f00cb0fee774&amp;source=constructor"
+                  width="1207"
+                  height="720"
                   className={cn(styles.cityMap)}
                   loading="lazy"
                 ></iframe>

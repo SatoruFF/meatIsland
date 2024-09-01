@@ -16,8 +16,8 @@ const TabsMenu: React.FC = () => {
 
   const [tabsMenu] = useState<{ [key: number]: Tab }>({
     1: { title: "Продукция", path: PATHS.CATALOG_PATH },
-    2: { title: "Отзывы", path: PATHS.REVIEWS },
-    3: { title: "Контакты", path: PATHS.CONTACTS },
+    // 2: { title: "Отзывы", path: PATHS.REVIEWS },
+    // 3: { title: "Контакты", path: PATHS.CONTACTS },
   });
 
   return (

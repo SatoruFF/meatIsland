@@ -6,6 +6,7 @@ import { privateRoutes } from "../routes/private";
 import CatalogPage from "../features/Catalog";
 import CategoryContainer from "../features/Catalog/components/Body/components/CategoryContainer";
 import React from "react";
+import MainCatalog from "../features/Catalog/components/Body/components/MainCatalog";
 
 const AppRouter = () => {
   const isAuth = true; // need to implement auth in future
@@ -35,6 +36,7 @@ const AppRouter = () => {
       )}
       <Route path={PATHS.CATALOG_PATH} element={<CatalogPage />}>
         <Route path=":id" element={<CategoryContainer />} />
+        <Route path={PATHS.CATALOG_PATH} element={<MainCatalog />} />
       </Route>
       <Route path="/*" element={<Navigate replace to={PATHS.WELCOME_PATH} />} />
     </Routes>

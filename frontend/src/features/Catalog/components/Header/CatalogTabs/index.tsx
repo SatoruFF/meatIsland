@@ -26,13 +26,13 @@ const CatalogTabs = () => {
     7: { title: "Сосиски", id: "7" },
   };
 
-  useEffect(() => {
-    if (location.pathname === PATHS.CATALOG_PATH) {
-      const firstKey: any = Object.keys(tabsMenu)[0];
-      const firstCategory = tabsMenu[firstKey];
-      handleTabClick(firstCategory.id);
-    }
-  }, []);
+  // useEffect(() => {
+  //   if (location.pathname === PATHS.CATALOG_PATH) {
+  //     const firstKey: any = Object.keys(tabsMenu)[0];
+  //     const firstCategory = tabsMenu[firstKey];
+  //     handleTabClick(firstCategory.id);
+  //   }
+  // }, []);
 
   useEffect(() => {
     const currentTab = Object.values(tabsMenu).find((tab) =>
@@ -40,6 +40,8 @@ const CatalogTabs = () => {
     );
     if (currentTab) {
       setActiveTab(currentTab.id);
+    } else {
+      setActiveTab(null);
     }
   }, [location.pathname]);
 

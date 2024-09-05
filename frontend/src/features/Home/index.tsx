@@ -7,9 +7,21 @@ import Navbar from "../Catalog/components/Body/components/Navbar";
 import styles from "./style.module.less";
 import Reviews from "./components/Reviews/Review";
 import Contacts from "./components/Contacts/Contacts";
-import React from "react";
+import React, { useEffect } from "react";
+import { useLocation } from "react-router-dom";
 
 export default function HomePage() {
+  const location = useLocation();
+
+  useEffect(() => {
+    if (location.state?.scrollTo) {
+      const element = document.getElementById(location.state.scrollTo);
+      if (element) {
+        element.scrollIntoView({ behavior: "smooth" });
+      }
+    }
+  }, [location.state]);
+
   return (
     <React.Fragment>
       <Anchor

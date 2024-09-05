@@ -1,5 +1,6 @@
 import _ from "lodash";
 import styles from "../stylesBody.module.less";
+import { useEffect, useState } from "react";
 
 const Basket = () => {
   interface Item {
@@ -44,37 +45,61 @@ const Basket = () => {
       weight: "1 кг",
     },
   };
+
+  const [countProduct, setCountProduct] = useState<number>(0);
+  const [sumPrice, setSumPrice] = useState<number>(0);
+
+  useEffect(() => {
+    const newCountProduct = Object.keys(items).length;
+
+    let newSumPrice = 0;
+
+    _.forEach(items, (item) => {
+      newSumPrice += item.price;
+    });
+
+    setSumPrice(newSumPrice);
+    setCountProduct(newCountProduct);
+  }, [items]);
+
   return (
     <div className={styles.basket}>
       <div className={styles.basketHeader}>
         <h3>Корзина</h3>
-        <div className={styles.countBasket}>4</div>
+        <div className={styles.countBasket}>{countProduct}</div>
       </div>
-
-      {_.map(items, (item) => (
-        <div key={item.id} className={styles.basketItem}>
-          <img
-            className={styles.imageBasketItem}
-            src="https://roscontrol.com/files/original_images/articles/94/cf/94cfa966daf5ef5409cb.jpg"
-            alt={item.title}
-          />
-          <div className={styles.itemDetails}>
-            <p>{item.title}</p>
-            <p>{item.weight}</p>
-            <p>{item.price}</p>
+      {countProduct > 0 ? (
+        _.map(items, (item) => (
+          <div key={item.id} className={styles.basketItem}>
+            <img
+              className={styles.imageBasketItem}
+              src="https://roscontrol.com/files/original_images/articles/94/cf/94cfa966daf5ef5409cb.jpg"
+              alt={item.title}
+            />
+            <div className={styles.itemDetails}>
+              <p>{item.title}</p>
+              <p>{item.weight}</p>
+              <p>{item.price}</p>
+            </div>
+            <div className={styles.itemCount}>
+              <p> - </p>
+              <p>2</p>
+              <p> + </p>
+            </div>
           </div>
-          <div className={styles.itemCount}>
-            <p> - </p>
-            <p>2</p>
-            <p> + </p>
+        ))
+      ) : (
+        <div>Тут пока пусто :(</div>
+      )}
+      {countProduct > 0 && (
+        <>
+          <div className={styles.sum}>
+            <p>Итого</p>
+            <p>{sumPrice}₽</p>
           </div>
-        </div>
-      ))}
-      <div className={styles.sum}>
-        <p>Итого</p>
-        <p>1673₽</p>
-      </div>
-      <div className={styles.addBasket}>Оформит доставку</div>
+          <div className={styles.addBasket}>Оформит доставку</div>
+        </>
+      )}
     </div>
   );
 };

@@ -1,22 +1,20 @@
 @blockBackground: #262626;
-.contacts-wrapper {
+.maps-wrapper {
   width: 100%;
-  min-height: 100vh;
   overflow: hidden;
   background: @blockBackground;
   display: flex;
   flex-direction: column;
   box-sizing: border-box;
-  padding: 30px;
 }
 
-.contacts_mainestTitle {
+.maps_mainestTitle {
   margin-top: 10px;
   color: white !important;
   align-self: center;
 }
 
-.contacts-title {
+.maps-title {
   box-sizing: border-box;
   padding-top: 10px;
   align-self: center;
@@ -24,15 +22,15 @@
   font-size: 24px;
 }
 
-.contacts__left-side {
+.maps__left-side {
   display: flex;
   flex-direction: row;
   justify-content: center;
   gap: 30px;
   border: 1px solid white;
-  border-radius: 10px;
+  border-radius: 4px;
   box-sizing: border-box;
-  margin-left: 10px;
+  margin: 0 20px;
   padding: 5px;
   text-align: center;
 
@@ -45,7 +43,7 @@
   }
 }
 
-.contacts__right-side-map {
+.maps__right-side-map {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -60,14 +58,14 @@
   }
 }
 
-.contacts__right-side-title {
+.maps__right-side-title {
   color: white;
   font-size: 29px;
   text-align: center;
-  padding: 15px;
+  padding-top: 15px;
 }
 
-.contacts__right-side {
+.maps__right-side {
   width: 100%;
   padding: 10px;
   display: flex;
@@ -75,7 +73,7 @@
   gap: 10px;
 }
 
-.contacts__content-main {
+.maps__content-main {
   width: 100%;
   display: flex;
   flex-direction: column;
@@ -87,45 +85,72 @@
   width: 600px;
 }
 
+.ContainerMaps{
+    display: flex;
+    padding: 0 20px;
+    margin-bottom: 40px;
+    width: 100%;
+}
+
+.maps__right-side-map{
+    padding: 0 40px;
+    flex-direction: column;
+}
+
+.titleMap{
+    color: #fff;
+    padding: 20px 0;
+    font-size: 20px;
+}
+
 // Медиазапросы
 @media screen and (max-width: 992px) {
-  .contacts-wrapper {
-    .contacts-title {
+    .ContainerMaps{
+        flex-direction: column;
+    }
+  .maps-wrapper {
+    .maps-title {
       font-size: 19px;
     }
 
-    .contacts__content-main {
+    .maps__content-main {
       flex-direction: column !important;
 
-      .contacts__left-side {
+      .maps__left-side {
         margin-left: 5px;
         flex-direction: column;
       }
 
-      .contacts__right-side {
+      .maps__right-side {
         display: flex;
         flex-direction: column;
         align-items: center;
         justify-content: center !important;
         width: 100% !important;
 
-        .contacts__right-side-title {
+        .maps__right-side-title {
           width: 100%;
           height: 30px;
           margin-bottom: 15px;
         }
 
-        .contacts__right-side-map {
+        .maps__right-side-map {
           width: 100%;
           margin-bottom: 10px;
 
           iframe {
             margin-right: 20px;
             height: 400px !important;
-            width: 340px !important;
           }
         }
       }
     }
   }
+}
+
+
+// Footer
+
+.footerWelcom{
+    background-color: red;
 }

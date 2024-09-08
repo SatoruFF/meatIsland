@@ -1,9 +1,14 @@
 import Logo from "../../../../shared/components/Logo";
+import cn from "classnames";
 import styles from "./styles.module.less";
 
-const Footer = () => {
+const Footer = (props) => {
   return (
-    <div className={styles.footerContainer}>
+    <div
+      className={cn(styles.footerContainer, {
+        [styles.footerContainerWelcom]: props.isMain,
+      })}
+    >
       <div className={styles.mainContainer}>
         <div className={styles.logoContainer}>
           <Logo />

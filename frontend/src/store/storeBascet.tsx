@@ -12,7 +12,7 @@ type Basket = {
 
 type StoreState = {
   basket: { [key: number]: Basket };
-  addToCart: (itemId: string) => void;
+  addToBasket: (itemId: string) => void;
   removeFromCart: (itemId: string) => void;
   increaseQuantity: (itemId: string) => void;
   decreaseQuantity: (itemId: string) => void;
@@ -59,19 +59,26 @@ const basketStore = create<StoreState>((set, get) => ({
   basket,
 
   // Добавление товара в корзину
-  addToCart: (itemId) =>
+  addToBasket: (newItem) =>
     set((state) => {
-      const existingItem = _.find(state.basket, (item) => item.id === itemId);
+      const existingItem = state.basket[newItem.id];
       if (existingItem) {
         return {
-          basket: state.basket.map((item) =>
-            item.itemId === itemId
-              ? { ...item, quantity: item.quantity + 1 }
-              : item
-          ),
+          basket: {
+            ...state.basket,
+            [newItem.id]: {
+              ...existingItem,
+              quantity: (existingItem.quantity || 0) + 1,
+            },
+          },
         };
       }
-      return { basket: [...state.basket, { itemId, quantity: 1 }] };
+      return {
+        basket: {
+          ...state.basket,
+          [newItem.id]: { ...newItem, quantity: 1 },
+        },
+      };
     }),
 
   // Удаление товара из корзины

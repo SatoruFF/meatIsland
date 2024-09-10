@@ -1,5 +1,6 @@
 import _ from "lodash";
 import styles from "../stylesBody.module.less";
+import basketStore from "../../../../../store/storeBascet";
 
 const ProductItem = () => {
   interface Item {
@@ -9,6 +10,7 @@ const ProductItem = () => {
     description: string;
     weight: string;
   }
+  const { addToBasket } = basketStore();
 
   const mockItems: { [key: number]: Item } = {
     1: {
@@ -86,7 +88,7 @@ const ProductItem = () => {
                 <p className={styles.weight}>{item.weight}</p>
               </div>
             </div>
-            <div className={styles.addBtn}>
+            <div onClick={() => addToBasket(item)} className={styles.addBtn}>
               <p>Добавить в корзину</p>
             </div>
           </div>

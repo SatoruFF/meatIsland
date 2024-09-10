@@ -2,7 +2,7 @@ import React from "react";
 import styles from "./style.module.less";
 import cn from "classnames";
 import { Typography } from "antd";
-import Footer from "../../../Catalog/components/Footer";
+import Footer from "../../../../shared/components/Footer";
 
 const { Title, Text } = Typography;
 

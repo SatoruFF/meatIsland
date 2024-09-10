@@ -1,0 +1,153 @@
+.footerContainer {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: flex-start;
+  padding: 20px 40px;
+  background-color: #fff;
+  margin-top: auto;
+}
+
+.mainContainer {
+  flex: 0 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.logoContainer {
+}
+
+.name {
+  margin-top: 20px;
+}
+
+.infoContainer {
+  flex: 1 0 auto;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  gap: 5%;
+}
+
+.numberContainer,
+.adressContainer {
+}
+
+.numberContainer p,
+.adressContainer p {
+  margin: 10px 0;
+}
+
+.footerContainer div {
+  font-family: Arial, sans-serif;
+}
+
+.footerContainer div div:first-child {
+  margin-bottom: 5px;
+}
+
+.title {
+  font-size: 23px;
+  padding-bottom: 10px;
+}
+
+// Footer in Main Page
+.footerContainerWelcom {
+  background-color: #2c2c2c;
+  color: #fff;
+}
+
+// Media Queries for responsiveness
+@media (max-width: 1200px) {
+  .footerContainer {
+    padding: 15px 30px;
+  }
+
+  .infoContainer {
+    gap: 3%;
+  }
+
+  .title {
+    font-size: 20px;
+  }
+}
+
+@media (max-width: 992px) {
+  .footerContainer {
+    flex-direction: row;
+    align-items: center;
+    padding: 10px 20px;
+  }
+
+  .mainContainer {
+    margin-bottom: 20px;
+    margin-left: 20px;
+    margin-right: 150px;
+    text-align: center;
+
+  }
+
+  .infoContainer {
+    margin-top: 10px;
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+  }
+
+  .numberContainer,
+  .adressContainer {
+    width: 100%;
+  }
+
+  .title {
+    font-size: 18px;
+  }
+}
+
+@media (max-width: 768px) {
+  .footerContainer {
+    padding: 10px 15px;
+    flex-direction: column;
+  }
+
+  .mainContainer {
+      margin: 0;
+      margin-bottom: 20px;
+  }
+
+  .infoContainer {
+    gap: 10px;
+  }
+
+  .numberContainer, .adressContainer{
+      text-align: center;
+  }
+
+  .title {
+    font-size: 16px;
+  }
+}
+
+@media (max-width: 480px) {
+  .footerContainer {
+    padding: 5px 10px;
+  }
+
+  .mainContainer {
+    text-align: center;
+  }
+
+  .infoContainer {
+    gap: 10px;
+  }
+
+  .numberContainer p,
+  .adressContainer p {
+    font-size: 12px;
+  }
+
+  .title {
+    font-size: 14px;
+  }
+}

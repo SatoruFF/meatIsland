@@ -1,4 +1,4 @@
-import Logo from "../../../../shared/components/Logo";
+import Logo from "../Logo";
 import cn from "classnames";
 import styles from "./styles.module.less";
 

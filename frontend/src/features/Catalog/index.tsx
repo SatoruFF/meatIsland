@@ -1,5 +1,5 @@
 import CatalogBody from "./components/Body/index";
-import Footer from "./components/Footer/index";
+import Footer from "../../shared/components/Footer";
 import Header from "./components/Header/index";
 
 import styles from "./stylesCatalog.module.less";

@@ -26,14 +26,6 @@ const CatalogTabs = () => {
     7: { title: "Сосиски", id: "7" },
   };
 
-  // useEffect(() => {
-  //   if (location.pathname === PATHS.CATALOG_PATH) {
-  //     const firstKey: any = Object.keys(tabsMenu)[0];
-  //     const firstCategory = tabsMenu[firstKey];
-  //     handleTabClick(firstCategory.id);
-  //   }
-  // }, []);
-
   useEffect(() => {
     const currentTab = Object.values(tabsMenu).find((tab) =>
       location.pathname.includes(tab.id)
@@ -41,7 +33,7 @@ const CatalogTabs = () => {
     if (currentTab) {
       setActiveTab(currentTab.id);
     } else {
-      setActiveTab(null);
+      setActiveTab("");
     }
   }, [location.pathname]);
 
@@ -52,19 +44,21 @@ const CatalogTabs = () => {
   };
 
   return (
-    <span className={styles.catalogTabs}>
-      {_.map(tabsMenu, (tab) => (
-        <div
-          onClick={() => handleTabClick(tab.id)}
-          className={`${styles.catalogTab} ${
-            activeTab === tab.id ? styles.activeTab : ""
-          }`}
-          key={tab.id}
-        >
-          {tab.title}
-        </div>
-      ))}
-    </span>
+    <div className={styles.catalogTabsContainer}>
+      <span className={styles.catalogTabs}>
+        {_.map(tabsMenu, (tab) => (
+          <div
+            onClick={() => handleTabClick(tab.id)}
+            className={`${styles.catalogTab} ${
+              activeTab === tab.id ? styles.activeTab : ""
+            }`}
+            key={tab.id}
+          >
+            {tab.title}
+          </div>
+        ))}
+      </span>
+    </div>
   );
 };
 

@@ -1,10 +1,10 @@
-// services/postService.ts
 import axiosInstance from "./index";
+import { mapResponse } from "./utils/mapResponse";
 
-export const getProducts = () => {
-  return axiosInstance.get("/products");
+export const getCategories = () => {
+  return axiosInstance.get("/categories").then((res) => mapResponse(res))
 };
 
 export const createProduct = (postData: object) => {
-  return axiosInstance.post("/products", postData);
+  return axiosInstance.post("/products", postData).then((res) => mapResponse(res))
 };

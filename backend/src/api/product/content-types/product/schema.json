@@ -34,14 +34,27 @@
       "inversedBy": "products"
     },
     "image": {
+      "type": "media",
+      "multiple": true,
+      "required": false,
       "allowedTypes": [
         "images",
         "files",
         "videos",
         "audios"
-      ],
-      "type": "media",
-      "multiple": true
+      ]
+    },
+    "StockQuantity": {
+      "type": "integer"
+    },
+    "sale": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::sale.sale",
+      "inversedBy": "products"
+    },
+    "tradePrice": {
+      "type": "float"
     }
   }
 }

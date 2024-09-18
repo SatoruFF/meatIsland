@@ -49,7 +49,7 @@ const CatalogTabs = () => {
     const fetchCategoryItems = async () => {
       try {
         setIsLoading(true)
-        const data = await getCategories();        
+        const { data } = await getCategories();        
         setCategoryItems(mapCategoryItems(data));
       } catch(e: any) {
         console.error(e.message)

@@ -2,6 +2,7 @@ import _ from "lodash";
 import styles from "../stylesBody.module.less";
 import { useEffect, useState } from "react";
 import basketStore from "../../../../../store/storeBascet";
+import ProductModal from "./ProductModal";
 
 const BasketProduct = () => {
   const {
@@ -17,6 +18,17 @@ const BasketProduct = () => {
   const [basketProduct, setBasketProduct] = useState(basket);
   const [countProduct, setCountProduct] = useState<number>(0);
   const [sumPrice, setSumPrice] = useState<number>(0);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [openItemModal, setOpenItemModal] = useState({});
+
+  const openModal = (item) => {
+    setOpenItemModal(item);
+    setIsModalOpen(true);
+  };
+
+  const cancelModal = () => {
+    setIsModalOpen(false);
+  };
 
   useEffect(() => {
     const newCountProduct = Object.keys(basket).length;
@@ -35,15 +47,20 @@ const BasketProduct = () => {
       {countProduct > 0 ? (
         _.map(basketProduct, (product) => (
           <div key={product.id} className={styles.basketItem}>
-            <img
-              className={styles.imageBasketItem}
-              src="https://roscontrol.com/files/original_images/articles/94/cf/94cfa966daf5ef5409cb.jpg"
-              alt={product.title}
-            />
-            <div className={styles.itemDetails}>
-              <p>{product.title}</p>
-              <p>{product.weight}</p>
-              <p>{product.price}</p>
+            <div
+              className={styles.containerClick}
+              onClick={() => openModal(product)}
+            >
+              <img
+                className={styles.imageBasketItem}
+                src="https://roscontrol.com/files/original_images/articles/94/cf/94cfa966daf5ef5409cb.jpg"
+                alt={product.title}
+              />
+              <div className={styles.itemDetails}>
+                <p>{product.title}</p>
+                <p>{product.weight}</p>
+                <p>{product.price}</p>
+              </div>
             </div>
             <div className={styles.itemCount}>
               <button
@@ -72,6 +89,11 @@ const BasketProduct = () => {
           <div className={styles.addBasket}>Оформить доставку</div>
         </>
       )}
+      <ProductModal
+        item={openItemModal}
+        isOpen={isModalOpen}
+        onClose={cancelModal}
+      />
     </div>
   );
 };

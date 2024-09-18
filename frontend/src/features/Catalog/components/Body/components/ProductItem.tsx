@@ -1,17 +1,20 @@
 import _ from "lodash";
-import styles from "../stylesBody.module.less";
+
 import basketStore from "../../../../../store/storeBascet";
 
-const ProductItem = () => {
+import styles from "../stylesBody.module.less";
+import React, { useState } from "react";
+import ProductModal from "./ProductModal";
+
+const ProductItem = React.memo(() => {
   interface Item {
     title: string;
     id: string;
     price: number;
     description: string;
     weight: string;
+    composition: string;
   }
-  const { addToBasket } = basketStore();
-
   const mockItems: { [key: number]: Item } = {
     1: {
       title: "Мясо",
@@ -20,6 +23,7 @@ const ProductItem = () => {
       description:
         "Свежая говядина высшего сорта, идеально подходит для жарки и тушения.",
       weight: "1 кг",
+      composition: "мясо, соль, перец, тесто",
     },
     2: {
       title: "Колбаса",
@@ -28,6 +32,7 @@ const ProductItem = () => {
       description:
         "Колбаса с натуральными специями, сделана по традиционному рецепту.",
       weight: "0.5 кг",
+      composition: "мясо, соль, перец, тесто",
     },
     3: {
       title: "Пельмени",
@@ -36,6 +41,7 @@ const ProductItem = () => {
       description:
         "Домашние пельмени с сочным мясным фаршем, идеальный выбор для быстрого ужина.",
       weight: "1 кг",
+      composition: "мясо, соль, перец, тесто",
     },
     4: {
       title: "Фарш",
@@ -69,33 +75,60 @@ const ProductItem = () => {
       weight: "0.4 кг",
     },
   };
+  const { addToBasket } = basketStore();
+
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [openItemModal, setOpenItemModal] = useState({});
+
+  const addToBasketClick = (item) => {
+    addToBasket(item);
+    setIsModalOpen(false);
+  };
+
+  const openModal = (item) => {
+    setOpenItemModal(item);
+    setIsModalOpen(true);
+  };
+
+  const cancelModal = () => {
+    setIsModalOpen(false);
+  };
 
   return (
     <div className={styles.gridContainer}>
       {_.map(mockItems, (item) => {
         return (
-          <div key={item.id} className={styles.item}>
-            <img
-              className={styles.imageItem}
-              src="https://roscontrol.com/files/original_images/articles/94/cf/94cfa966daf5ef5409cb.jpg"
-              alt={item.title}
-            />
-            <div className={styles.itemContent}>
-              <h3 className={styles.title}>{item.title}</h3>
-              <p className={styles.description}>{item.description}</p>
-              <div className={styles.numInfo}>
-                <p className={styles.price}>{item.price} ₽</p>
-                <p className={styles.weight}>{item.weight}</p>
+          <div key={item.id}>
+            <div key={item.id} className={styles.item}>
+              <div onClick={() => openModal(item)}>
+                <img
+                  className={styles.imageItem}
+                  src="https://roscontrol.com/files/original_images/articles/94/cf/94cfa966daf5ef5409cb.jpg"
+                  alt={item.title}
+                />
+                <div className={styles.itemContent}>
+                  <h3 className={styles.title}>{item.title}</h3>
+                  <p className={styles.description}>{item.description}</p>
+                  <div className={styles.numInfo}>
+                    <p className={styles.price}>{item.price} ₽</p>
+                    <p className={styles.weight}>{item.weight}</p>
+                  </div>
+                </div>
               </div>
-            </div>
-            <div onClick={() => addToBasket(item)} className={styles.addBtn}>
-              <p>Добавить в корзину</p>
+              <div onClick={() => addToBasket(item)} className={styles.addBtn}>
+                <p>Добавить в корзину</p>
+              </div>
             </div>
           </div>
         );
       })}
+      <ProductModal
+        item={openItemModal}
+        isOpen={isModalOpen}
+        onClose={cancelModal}
+        addToBasket={addToBasketClick}
+      />
     </div>
   );
-};
-
+});
 export default ProductItem;

@@ -797,7 +797,7 @@ export interface ApiCategoryCategory extends Schema.CollectionType {
     description: '';
   };
   options: {
-    draftAndPublish: true;
+    draftAndPublish: false;
   };
   attributes: {
     name: Attribute.String;
@@ -808,7 +808,6 @@ export interface ApiCategoryCategory extends Schema.CollectionType {
     >;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
-    publishedAt: Attribute.DateTime;
     createdBy: Attribute.Relation<
       'api::category.category',
       'oneToOne',
@@ -833,7 +832,7 @@ export interface ApiProductProduct extends Schema.CollectionType {
     description: '';
   };
   options: {
-    draftAndPublish: true;
+    draftAndPublish: false;
   };
   attributes: {
     name: Attribute.String;
@@ -856,7 +855,6 @@ export interface ApiProductProduct extends Schema.CollectionType {
     tradePrice: Attribute.Float;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
-    publishedAt: Attribute.DateTime;
     createdBy: Attribute.Relation<
       'api::product.product',
       'oneToOne',
@@ -878,9 +876,10 @@ export interface ApiSaleSale extends Schema.CollectionType {
     singularName: 'sale';
     pluralName: 'sales';
     displayName: 'sale';
+    description: '';
   };
   options: {
-    draftAndPublish: true;
+    draftAndPublish: false;
   };
   attributes: {
     products: Attribute.Relation<
@@ -892,7 +891,6 @@ export interface ApiSaleSale extends Schema.CollectionType {
     TotalAmount: Attribute.Float;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
-    publishedAt: Attribute.DateTime;
     createdBy: Attribute.Relation<'api::sale.sale', 'oneToOne', 'admin::user'> &
       Attribute.Private;
     updatedBy: Attribute.Relation<'api::sale.sale', 'oneToOne', 'admin::user'> &

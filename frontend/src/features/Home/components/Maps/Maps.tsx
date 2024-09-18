@@ -24,7 +24,6 @@ const Maps = () => {
                   <iframe
                     src="https://yandex.ru/map-widget/v1/?um=constructor%3A7a64fc5fe991ec44ce63fa8e6cfb0ea07a64e4e2a76847f075e5f00cb0fee774&amp;source=constructor"
                     className={cn(styles.cityMap)}
-                    loading="lazy"
                   ></iframe>
                 </div>
                 <div className={cn(styles["maps__right-side-map"])}>
@@ -35,7 +34,6 @@ const Maps = () => {
                   <iframe
                     src="https://yandex.ru/map-widget/v1/?um=constructor%3A7a64fc5fe991ec44ce63fa8e6cfb0ea07a64e4e2a76847f075e5f00cb0fee774&amp;source=constructor"
                     className={cn(styles.cityMap)}
-                    loading="lazy"
                   ></iframe>
                 </div>
               </div>

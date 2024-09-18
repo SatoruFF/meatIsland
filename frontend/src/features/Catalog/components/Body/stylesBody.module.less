@@ -29,6 +29,7 @@
   padding: 15px;
   transition: transform 0.3s ease, box-shadow 0.3s ease;
   height: 100%;
+  cursor: pointer;
 }
 
 .item:hover {
@@ -85,6 +86,13 @@
 // Basket
 .basketContainer{
     padding: 15px;
+}
+
+.containerClick{
+    display: flex;
+    flex-direction: row;
+    cursor: pointer;
+    width: 100%;
 }
 
 .basket{
@@ -165,6 +173,7 @@
     color: #fff;
     border-radius: 8px;
     padding: 5px;
+    cursor: pointer;
 }
 
 
@@ -263,4 +272,93 @@
 
 .MenuItem:hover{
     font-size: 22px;
+}
+
+// product Modal
+
+.productModal {
+    .container {
+        display: flex;
+        flex-direction: row;
+    }
+
+    .imageItem {
+        width: 50%;
+    }
+
+    .itemContent {
+        padding: 0 20px;
+    }
+
+    .addBtn {
+        margin-top: 30px;
+        cursor: pointer;
+    }
+
+    .composition {
+        display: flex;
+        flex-direction: row;
+        margin-top: 20px;
+        color: #666;
+
+        p {
+            color: #555;
+            padding-right: 5px;
+        }
+    }
+
+    .numInfo {
+        margin-top: 10px;
+    }
+}
+
+/* Мобильные устройства */
+@media (max-width: 768px) {
+    .productModal {
+        .container {
+            flex-direction: column;
+        }
+
+        .imageItem {
+            width: 100%;
+        }
+
+        .itemContent {
+            padding: 10px;
+        }
+
+        .addBtn {
+            margin-top: 20px;
+        }
+
+        .composition {
+            flex-direction: column;
+            align-items: flex-start;
+
+            p {
+                padding-right: 0;
+            }
+        }
+    }
+}
+
+/* ПК */
+@media (min-width: 769px) {
+    .productModal {
+        .container {
+            flex-direction: row;
+        }
+
+        .imageItem {
+            width: 50%;
+        }
+
+        .itemContent {
+            padding: 0 20px;
+        }
+
+        .addBtn {
+            margin-top: 30px;
+        }
+    }
 }

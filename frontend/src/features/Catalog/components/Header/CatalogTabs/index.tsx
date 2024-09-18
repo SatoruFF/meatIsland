@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import _ from "lodash";
-import { Empty, Spin, message } from "antd";
+import { Spin, message } from "antd";
 
 import { PATHS } from "../../../../../constants/paths";
 import styles from "../styles.module.less";
@@ -9,11 +9,11 @@ import { getCategories } from "../../../../../services/productService";
 
 type ItemAttrs = {
   name: string;
-}
+};
 
 interface Category {
   id: string;
-  attributes: ItemAttrs
+  attributes: ItemAttrs;
 }
 
 interface Tab {
@@ -31,31 +31,27 @@ const CatalogTabs = () => {
 
   const [activeTab, setActiveTab] = useState<string>("");
   const [categoryItems, setCategoryItems] = useState<CategoryItems>({});
-  const [isLoading, setIsLoading] = useState<boolean>(false)
+  const [isLoading, setIsLoading] = useState<boolean>(false);
 
   const mapCategoryItems = (data: Category[]): CategoryItems => {
     const result: CategoryItems = {};
-    console.log("DATA", data);
-    
     _.forEach(data, (item) => {
       result[item.id] = { title: item.attributes.name, id: item.id };
     });
-    console.log("res", result);
-    
     return result;
   };
 
   useEffect(() => {
     const fetchCategoryItems = async () => {
       try {
-        setIsLoading(true)
-        const { data } = await getCategories();        
+        setIsLoading(true);
+        const { data } = await getCategories();
         setCategoryItems(mapCategoryItems(data));
-      } catch(e: any) {
-        console.error(e.message)
+      } catch (e: any) {
+        console.error(e.message);
         message.error("Что-то пошло не так при загрузке категорий.");
       } finally {
-        setIsLoading(false)
+        setIsLoading(false);
       }
     };
 
@@ -64,7 +60,7 @@ const CatalogTabs = () => {
 
   // Update active tab when categories or location.pathname changes
   useEffect(() => {
-    if (_.isEmpty(categoryItems)) return;    
+    if (_.isEmpty(categoryItems)) return;
     const currentTab = Object.values(categoryItems).find((tab) =>
       location.pathname.includes(tab.id)
     );
@@ -84,8 +80,8 @@ const CatalogTabs = () => {
   return (
     <div className={styles.catalogTabsContainer}>
       <span className={styles.catalogTabs}>
-        {isLoading && <Spin/>}
-        {!_.isEmpty(categoryItems) && (
+        {isLoading && <Spin />}
+        {!_.isEmpty(categoryItems) &&
           _.map(categoryItems, (tab) => (
             <div
               onClick={() => handleTabClick(tab.id)}
@@ -96,8 +92,7 @@ const CatalogTabs = () => {
             >
               {tab.title}
             </div>
-          ))
-        )}
+          ))}
       </span>
     </div>
   );

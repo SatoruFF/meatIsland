@@ -1,84 +1,57 @@
 import _ from "lodash";
-
 import basketStore from "../../../../../store/storeBascet";
-
 import styles from "../stylesBody.module.less";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import ProductModal from "./ProductModal";
+import { useLocation } from "react-router-dom";
+import { getProducts } from "../../../../../services/productService";
+import { message, Spin } from "antd";
+
+interface IProductAttributes {
+  name: string;
+  price: number;
+  createdAt: string;
+  updatedAt: string;
+  description: string;
+  available: boolean;
+  weight: string | null; 
+  StockQuantity: number | null;
+  tradePrice: number | null;
+  // TODO: need to add sequense with category for filter item
+}
+
+interface IProduct {
+  id: number;
+  attributes: IProductAttributes;
+}
+
 
 const ProductItem = React.memo(() => {
-  interface Item {
-    title: string;
-    id: string;
-    price: number;
-    description: string;
-    weight: string;
-    composition: string;
-  }
-  const mockItems: { [key: number]: Item } = {
-    1: {
-      title: "Мясо",
-      id: "1",
-      price: 500,
-      description:
-        "Свежая говядина высшего сорта, идеально подходит для жарки и тушения.",
-      weight: "1 кг",
-      composition: "мясо, соль, перец, тесто",
-    },
-    2: {
-      title: "Колбаса",
-      id: "2",
-      price: 350,
-      description:
-        "Колбаса с натуральными специями, сделана по традиционному рецепту.",
-      weight: "0.5 кг",
-      composition: "мясо, соль, перец, тесто",
-    },
-    3: {
-      title: "Пельмени",
-      id: "3",
-      price: 250,
-      description:
-        "Домашние пельмени с сочным мясным фаршем, идеальный выбор для быстрого ужина.",
-      weight: "1 кг",
-      composition: "мясо, соль, перец, тесто",
-    },
-    4: {
-      title: "Фарш",
-      id: "4",
-      price: 400,
-      description:
-        "Смесь из свежей свинины и говядины, идеально подходит для котлет и других блюд.",
-      weight: "1 кг",
-    },
-    5: {
-      title: "Говядина",
-      id: "5",
-      price: 550,
-      description:
-        "Кусок говядины высшего сорта, идеально для стейков и запекания.",
-      weight: "1 кг",
-    },
-    6: {
-      title: "Баранина",
-      id: "6",
-      price: 600,
-      description:
-        "Свежее мясо ягненка, идеальный выбор для приготовления шашлыка.",
-      weight: "1 кг",
-    },
-    7: {
-      title: "Сосиски",
-      id: "7",
-      price: 300,
-      description: "Нежные и сочные сосиски с легким ароматом копчения.",
-      weight: "0.4 кг",
-    },
-  };
+
+  const location = useLocation();
   const { addToBasket } = basketStore();
 
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [openItemModal, setOpenItemModal] = useState({});
+  const [products, setProducts] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
+
+  useEffect(() => {
+    const fetchProducts = async () => {
+      try {
+        setIsLoading(true);
+        const { data } = await getProducts();        
+        setProducts(data);
+      } catch (e: any) {
+        console.error(e.message);
+        message.error("Что-то пошло не так при загрузке товаров.");
+      } finally {
+        setIsLoading(false);
+      }
+    };
+
+    fetchProducts();
+  }, []);
 
   const addToBasketClick = (item) => {
     addToBasket(item);
@@ -94,34 +67,36 @@ const ProductItem = React.memo(() => {
     setIsModalOpen(false);
   };
 
+  if (isLoading) {
+    return <Spin />;
+  }
+
   return (
     <div className={styles.gridContainer}>
-      {_.map(mockItems, (item) => {
-        return (
-          <div key={item.id}>
-            <div key={item.id} className={styles.item}>
-              <div onClick={() => openModal(item)}>
-                <img
-                  className={styles.imageItem}
-                  src="https://roscontrol.com/files/original_images/articles/94/cf/94cfa966daf5ef5409cb.jpg"
-                  alt={item.title}
-                />
-                <div className={styles.itemContent}>
-                  <h3 className={styles.title}>{item.title}</h3>
-                  <p className={styles.description}>{item.description}</p>
-                  <div className={styles.numInfo}>
-                    <p className={styles.price}>{item.price} ₽</p>
-                    <p className={styles.weight}>{item.weight}</p>
-                  </div>
+      {_.map(products, (item: IProduct) => (
+        <div key={item.id}>
+          <div key={item.id} className={styles.item}>
+            <div onClick={() => openModal(item)}>
+              <img
+                className={styles.imageItem}
+                src="https://roscontrol.com/files/original_images/articles/94/cf/94cfa966daf5ef5409cb.jpg"
+                alt={item.attributes.name}
+              />
+              <div className={styles.itemContent}>
+                <h3 className={styles.title}>{item.attributes.name}</h3>
+                <p className={styles.description}>{item.attributes.description}</p>
+                <div className={styles.numInfo}>
+                  <p className={styles.price}>{item.attributes.price} ₽</p>
+                  <p className={styles.weight}>{item.attributes.weight}</p>
                 </div>
               </div>
-              <div onClick={() => addToBasket(item)} className={styles.addBtn}>
-                <p>Добавить в корзину</p>
-              </div>
+            </div>
+            <div onClick={() => addToBasket(item)} className={styles.addBtn}>
+              <p>Добавить в корзину</p>
             </div>
           </div>
-        );
-      })}
+        </div>
+      ))}
       <ProductModal
         item={openItemModal}
         isOpen={isModalOpen}
@@ -131,4 +106,5 @@ const ProductItem = React.memo(() => {
     </div>
   );
 });
+
 export default ProductItem;

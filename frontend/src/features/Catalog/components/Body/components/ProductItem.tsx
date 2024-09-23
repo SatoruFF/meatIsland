@@ -3,44 +3,79 @@ import basketStore from "../../../../../store/storeBascet";
 import styles from "../stylesBody.module.less";
 import React, { useEffect, useState } from "react";
 import ProductModal from "./ProductModal";
-import { useLocation } from "react-router-dom";
+import { useLocation, useParams } from "react-router-dom";
 import { getProducts } from "../../../../../services/productService";
 import { message, Spin } from "antd";
 
-interface IProductAttributes {
+interface CategoryAttributes {
+  name: string;
+  createdAt: string;
+  updatedAt: string;
+}
+
+interface CategoryData {
+  id: number;
+  attributes: CategoryAttributes;
+}
+
+interface ProductAttributes {
   name: string;
   price: number;
   createdAt: string;
   updatedAt: string;
   description: string;
   available: boolean;
-  weight: string | null; 
+  weight: number | null;
   StockQuantity: number | null;
   tradePrice: number | null;
-  // TODO: need to add sequense with category for filter item
+  category: {
+    data: CategoryData;
+  };
+  image: string | null;
 }
 
 interface IProduct {
   id: number;
-  attributes: IProductAttributes;
+  attributes: ProductAttributes;
 }
 
-
 const ProductItem = React.memo(() => {
-
-  const location = useLocation();
+  const { id: queryCategoryId } = useParams();
   const { addToBasket } = basketStore();
 
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [openItemModal, setOpenItemModal] = useState({});
-  const [products, setProducts] = useState([]);
+  const [products, setProducts] = useState<IProduct[]>([]);
+  const [filteredProducts, setFilteredProducts] = useState<IProduct[]>([]);
   const [isLoading, setIsLoading] = useState(false);
 
+  // TODO: Нужно отправлять запрос с фильтрацией, а не фильтровать тут
+  const filterProductsByCategory = (categoryId: number) => {
+    const filtered = products.filter((p: IProduct) => {
+      const { attributes } = p;
+      const currentCategoryRelation = _.get(attributes, [
+        "category",
+        "data",
+        "id",
+      ]);
+      return currentCategoryRelation === categoryId;
+    });
+    setFilteredProducts(filtered);
+  };
+
+  // Вызов фильтрации при изменении категории
+  useEffect(() => {
+    if (queryCategoryId && products.length) {
+      filterProductsByCategory(Number(queryCategoryId));
+    }
+  }, [queryCategoryId, products]);
+
+  // Загрузка продуктов
   useEffect(() => {
     const fetchProducts = async () => {
       try {
         setIsLoading(true);
-        const { data } = await getProducts();        
+        const { data } = await getProducts();
         setProducts(data);
       } catch (e: any) {
         console.error(e.message);
@@ -53,12 +88,12 @@ const ProductItem = React.memo(() => {
     fetchProducts();
   }, []);
 
-  const addToBasketClick = (item) => {
+  const addToBasketClick = (item: IProduct) => {
     addToBasket(item);
     setIsModalOpen(false);
   };
 
-  const openModal = (item) => {
+  const openModal = (item: IProduct) => {
     setOpenItemModal(item);
     setIsModalOpen(true);
   };
@@ -71,9 +106,13 @@ const ProductItem = React.memo(() => {
     return <Spin />;
   }
 
+  if (!filteredProducts.length) {
+    return <h1> В данной категории нет товаров </h1>;
+  }
+
   return (
     <div className={styles.gridContainer}>
-      {_.map(products, (item: IProduct) => (
+      {_.map(filteredProducts, (item: IProduct) => (
         <div key={item.id}>
           <div key={item.id} className={styles.item}>
             <div onClick={() => openModal(item)}>
@@ -84,7 +123,9 @@ const ProductItem = React.memo(() => {
               />
               <div className={styles.itemContent}>
                 <h3 className={styles.title}>{item.attributes.name}</h3>
-                <p className={styles.description}>{item.attributes.description}</p>
+                <p className={styles.description}>
+                  {item.attributes.description}
+                </p>
                 <div className={styles.numInfo}>
                   <p className={styles.price}>{item.attributes.price} ₽</p>
                   <p className={styles.weight}>{item.attributes.weight}</p>

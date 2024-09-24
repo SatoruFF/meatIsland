@@ -84,7 +84,6 @@ const ProductItem = React.memo(() => {
         setIsLoading(false);
       }
     };
-
     fetchProducts();
   }, []);
 
@@ -107,7 +106,11 @@ const ProductItem = React.memo(() => {
   }
 
   if (!filteredProducts.length) {
-    return <h1> В данной категории нет товаров </h1>;
+    return (
+      <h1 className={styles.titleDontProduct}>
+        В данной категории к сожелению нет товаров
+      </h1>
+    );
   }
 
   return (
@@ -126,14 +129,16 @@ const ProductItem = React.memo(() => {
                 <p className={styles.description}>
                   {item.attributes.description}
                 </p>
-                <div className={styles.numInfo}>
-                  <p className={styles.price}>{item.attributes.price} ₽</p>
-                  <p className={styles.weight}>{item.attributes.weight}</p>
-                </div>
               </div>
             </div>
-            <div onClick={() => addToBasket(item)} className={styles.addBtn}>
-              <p>Добавить в корзину</p>
+            <div className={styles.footerItemCard}>
+              <div className={styles.numInfo}>
+                <p className={styles.price}>{item.attributes.price} ₽</p>
+                <p className={styles.weight}>{item.attributes.weight}</p>
+              </div>
+              <div onClick={() => addToBasket(item)} className={styles.addBtn}>
+                <p>Добавить в корзину</p>
+              </div>
             </div>
           </div>
         </div>

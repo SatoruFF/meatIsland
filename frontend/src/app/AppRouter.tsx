@@ -38,7 +38,7 @@ const AppRouter = () => {
         <Route path=":id" element={<CategoryContainer />} />
         <Route path={PATHS.CATALOG_PATH} element={<MainCatalog />} />
       </Route>
-      <Route path="/*" element={<Navigate replace to={PATHS.WELCOME_PATH} />} />
+      <Route path="/*" element={<Navigate replace to={PATHS.CATALOG_PATH} />} />
     </Routes>
   );
 };

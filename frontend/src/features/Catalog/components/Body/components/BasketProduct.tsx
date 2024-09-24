@@ -3,6 +3,7 @@ import styles from "../stylesBody.module.less";
 import { useEffect, useState } from "react";
 import basketStore from "../../../../../store/storeBascet";
 import ProductModal from "./ProductModal";
+import BasketModal from "./BasketModal";
 
 const BasketProduct = () => {
   const {
@@ -20,19 +21,24 @@ const BasketProduct = () => {
   const [sumPrice, setSumPrice] = useState<number>(0);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [openItemModal, setOpenItemModal] = useState({});
+  const [isOpenFormBasketModal, setOpenFormBasketModal] = useState(false);
 
   const openModal = (item) => {
     setOpenItemModal(item);
     setIsModalOpen(true);
   };
 
+  const openFormModal = () => {
+    setOpenFormBasketModal(true);
+  };
+
   const cancelModal = () => {
     setIsModalOpen(false);
+    setOpenFormBasketModal(false);
   };
 
   useEffect(() => {
     const newCountProduct = Object.keys(basket).length;
-
     setBasketProduct(basket);
     setSumPrice(getTotalPrice());
     setCountProduct(newCountProduct);
@@ -54,18 +60,18 @@ const BasketProduct = () => {
               <img
                 className={styles.imageBasketItem}
                 src="https://roscontrol.com/files/original_images/articles/94/cf/94cfa966daf5ef5409cb.jpg"
-                alt={product.title}
+                alt={product.attributes.name}
               />
               <div className={styles.itemDetails}>
-                <p>{product.title}</p>
-                <p>{product.weight}</p>
-                <p>{product.price}</p>
+                <p>{product.attributes.name}</p>
+                <p>{product.attributes.weight}</p>
+                <p>{product.attributes.price} ₽</p>
               </div>
             </div>
             <div className={styles.itemCount}>
               <button
                 onClick={() =>
-                  (product?.quantity || 1) > 1
+                  (product.attributes?.quantity || 1) > 1
                     ? decreaseQuantity(product.id)
                     : removeFromCart(product.id)
                 }
@@ -86,13 +92,22 @@ const BasketProduct = () => {
             <p>Итого</p>
             <p>{sumPrice}₽</p>
           </div>
-          <div className={styles.addBasket}>Оформить доставку</div>
+          <div className={styles.addBasket} onClick={openFormModal}>
+            Оформить доставку
+          </div>
         </>
       )}
       <ProductModal
         item={openItemModal}
         isOpen={isModalOpen}
         onClose={cancelModal}
+      />
+      <BasketModal
+        items={basketProduct}
+        isOpen={isOpenFormBasketModal}
+        onClose={cancelModal}
+        countProduct={countProduct}
+        sumPrice={sumPrice}
       />
     </div>
   );

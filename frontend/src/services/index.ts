@@ -1,10 +1,10 @@
 import _ from "lodash";
 import axios from "axios";
-import { baseURL } from "./../constants/api";
+import { _baseURL } from "./../constants/api";
 import parseJSON from "./utils/parseJson";
 
 const axiosInstance = axios.create({
-  baseURL,
+  baseURL: _baseURL,
   headers: {
     "Content-Type": "application/json",
   },
@@ -22,7 +22,7 @@ const axiosInstance = axios.create({
 axiosInstance.interceptors.request.use((config) => {
   config.params = {
     ...config.params,
-    populate: "*",
+    // populate: "*", // need for fetch all relations in strapi
   };
   return config;
 });

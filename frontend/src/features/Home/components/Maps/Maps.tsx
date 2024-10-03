@@ -38,7 +38,6 @@ const Maps = () => {
                 </div>
               </div>
             </div>
-            <Footer isMain={true} />
           </div>
         </div>
       </div>

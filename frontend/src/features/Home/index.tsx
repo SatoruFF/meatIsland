@@ -9,6 +9,8 @@ import Reviews from "./components/Reviews/Review";
 import React, { useEffect } from "react";
 import { useLocation } from "react-router-dom";
 import Maps from "./components/Maps/Maps";
+import Certificates from "./components/Certificates/Certificates";
+import Footer from "../../shared/components/Footer";
 
 export default function HomePage() {
   const location = useLocation();
@@ -34,6 +36,10 @@ export default function HomePage() {
       <div className={styles.contacts} id="part-3">
         <Maps />
       </div>
+      <div className={styles.contacts} id="part-4">
+        <Certificates />
+      </div>
+      <Footer isMain={true} />
     </React.Fragment>
   );
 }

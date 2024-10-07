@@ -26,20 +26,22 @@ export default function HomePage() {
 
   return (
     <React.Fragment>
-      <div className={styles.mainPage} id="part-1">
+      <div className={styles.mainPage}>
         <Navbar />
         <MainCard />
       </div>
-      <div className={styles.reviews} id="part-2">
+      <div className={styles.reviews} id="part-1">
         <Reviews />
       </div>
-      <div className={styles.contacts} id="part-3">
+      <div className={styles.contacts}>
         <Maps />
       </div>
-      <div className={styles.contacts} id="part-4">
+      <div className={styles.contacts} id="part-2">
         <Certificates />
       </div>
-      <Footer isMain={true} />
+      <div id="part-3">
+        <Footer isMain={true} />
+      </div>
     </React.Fragment>
   );
 }

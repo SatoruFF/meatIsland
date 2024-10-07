@@ -14,17 +14,14 @@ const Footer = (props) => {
           <Logo />
         </div>
         <div className={styles.name}>
-          <p>© Мясной Остров, 2023</p>
+          <p>© Мясной Остров, 2024</p>
           <p>ИП: Валиуллин Гумер Эмирович</p>
         </div>
       </div>
       <div className={styles.infoContainer}>
         <div className={styles.numberContainer}>
-          <div className={styles.title}>Номера для заказов</div>
+          <div className={styles.title}>Номер для заказов</div>
           <div>
-            <p>
-              <a href="tel:+79308333811">+7 (930) 833-38-11</a>
-            </p>
             <p>
               <a href="tel:+79308333811">+7 (930) 833-38-11</a>
             </p>
@@ -35,12 +32,12 @@ const Footer = (props) => {
           <div>
             <p>
               <a href="https://yandex.ru/maps/-/CDs252KN" target="_blank">
-                ул. Фатыза Амирхана, д.21, г. Казань, Россия
+                ул. Фатыха Амирхана, д.21, г. Казань
               </a>
             </p>
             <p>
               <a href="https://yandex.ru/maps/-/CDs252KN" target="_blank">
-                ул. Фатыза Амирхана, д.21, г. Казань, Россия
+                ул. Осиновский переулок, д.16А, г. Казань
               </a>
             </p>
           </div>

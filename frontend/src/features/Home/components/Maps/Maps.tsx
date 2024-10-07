@@ -28,11 +28,10 @@ const Maps = () => {
                 </div>
                 <div className={cn(styles["maps__right-side-map"])}>
                   <div className={styles.titleMap}>
-                    Казань, ул. Татарстана, д.72:
+                    Казань, Осиновский переулок, д.16А:
                   </div>
-
                   <iframe
-                    src="https://yandex.ru/map-widget/v1/?um=constructor%3A7a64fc5fe991ec44ce63fa8e6cfb0ea07a64e4e2a76847f075e5f00cb0fee774&amp;source=constructor"
+                    src="https://yandex.ru/map-widget/v1/?um=constructor%3Ab47e1e144b661dac0fd73a7548de75c384ddb918161eb95184bff37f845ea816&amp;source=constructor"
                     className={cn(styles.cityMap)}
                   ></iframe>
                 </div>

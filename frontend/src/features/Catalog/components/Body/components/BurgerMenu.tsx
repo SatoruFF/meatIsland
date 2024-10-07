@@ -52,7 +52,7 @@ const BurgerMenu = () => {
             className={styles.MenuItem}
             onClick={() => handleNavigate("part-3")}
           >
-            Сертефикаты
+            Сертификаты
           </div>
         </div>
       </div>

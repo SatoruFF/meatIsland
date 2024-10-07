@@ -22,13 +22,13 @@ const TabsMenu: React.FC = () => {
         Продукция
       </div>
       <div className={cn(styles.navigateItem)}>
-        <a href="#part-2">Отзывы</a>
+        <a href="#part-1">Отзывы</a>
       </div>
       <div className={cn(styles.navigateItem)}>
-        <a href="#part-2">Контакты</a>
+        <a href="#part-2">Сертификаты</a>
       </div>
       <div className={cn(styles.navigateItem)}>
-        <a href="#part-3">Сертификаты</a>
+        <a href="#part-3">Контакты</a>
       </div>
     </span>
   );

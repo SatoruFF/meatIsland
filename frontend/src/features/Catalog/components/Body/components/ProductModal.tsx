@@ -49,13 +49,13 @@ const ProductModal = ({ item, isOpen, onClose, addToBasket }) => {
               <p className={styles.price}>{item.attributes.price} ₽</p>
               <p className={styles.weight}>{item.attributes.weight}</p>
             </div>
+            {addToBasket && (
+              <div onClick={() => addToBasket(item)} className={styles.addBtn}>
+                <p>Добавить в корзину</p>
+              </div>
+            )}
           </div>
         </div>
-        {addToBasket && (
-          <div onClick={() => addToBasket(item)} className={styles.addBtn}>
-            <p>Добавить в корзину</p>
-          </div>
-        )}
       </div>
     </Modal>
   );

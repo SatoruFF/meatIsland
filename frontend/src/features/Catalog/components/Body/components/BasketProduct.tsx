@@ -1,4 +1,5 @@
 import _ from "lodash";
+import { MinusOutlined, PlusOutlined } from "@ant-design/icons";
 import styles from "../stylesBody.module.less";
 import { useEffect, useState } from "react";
 import basketStore from "../../../../../store/storeBascet";
@@ -70,16 +71,22 @@ const BasketProduct = () => {
             </div>
             <div className={styles.itemCount}>
               <button
+                className={styles.btnCount}
                 onClick={() =>
-                  (product.attributes?.quantity || 1) > 1
-                    ? decreaseQuantity(product.id)
-                    : removeFromCart(product.id)
+                  product?.quantity === 1
+                    ? removeFromCart(product.id)
+                    : decreaseQuantity(product.id)
                 }
               >
-                -
+                <MinusOutlined />
               </button>
               <p>{product?.quantity || 1}</p>
-              <button onClick={() => increaseQuantity(product.id)}>+</button>
+              <button
+                className={styles.btnCount}
+                onClick={() => increaseQuantity(product.id)}
+              >
+                <PlusOutlined />
+              </button>
             </div>
           </div>
         ))

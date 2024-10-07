@@ -105,10 +105,10 @@ const ProductItem = React.memo(() => {
     return <Spin />;
   }
 
-  if (!filteredProducts.length) {
+  if (!products.length) {
     return (
       <h1 className={styles.titleDontProduct}>
-        В данной категории к сожелению нет товаров
+        В данной категории к сожалению нет товаров
       </h1>
     );
   }

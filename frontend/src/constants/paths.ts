@@ -1,7 +1,7 @@
 export enum PATHS {
   WELCOME_PATH = "/welcome",
-  CATALOG_PATH = "/catalogs",
-  CATALOG_PATH_ID = "/catalogs/:id",
+  CATALOG_PATH = "/catalog",
+  CATALOG_PATH_ID = "/catalog/:id",
   REVIEWS = "/reviews",
   CERTIFICATES = "/certificates",
   CONTACTS = "/contacts",

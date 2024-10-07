@@ -1,12 +1,30 @@
 import { create } from "zustand";
 import _ from "lodash";
 
+interface CategoryAttributes {
+  name: string;
+  createdAt: string;
+  updatedAt: string;
+}
+
+interface CategoryData {
+  id: number;
+  attributes: CategoryAttributes;
+}
 type Basket = {
-  title: string;
-  id: string;
+  name: string;
   price: number;
+  createdAt: string;
+  updatedAt: string;
   description: string;
-  weight: string;
+  available: boolean;
+  weight: number | null;
+  StockQuantity: number | null;
+  tradePrice: number | null;
+  category: {
+    data: CategoryData;
+  };
+  image: string | null;
   quantity: number;
 };
 
@@ -19,41 +37,7 @@ type StoreState = {
   getTotalPrice: () => number;
 };
 
-const basket: { [key: number]: Basket } = {
-  1: {
-    title: "Мясо",
-    id: "1",
-    price: 500,
-    description:
-      "Свежая говядина высшего сорта, идеально подходит для жарки и тушения.",
-    weight: "1 кг",
-    quantity: 2,
-  },
-  2: {
-    title: "Колбаса",
-    id: "2",
-    price: 350,
-    description:
-      "Колбаса с натуральными специями, сделана по традиционному рецепту.",
-    weight: "0.5 кг",
-  },
-  3: {
-    title: "Пельмени",
-    id: "3",
-    price: 250,
-    description:
-      "Домашние пельмени с сочным мясным фаршем, идеальный выбор для быстрого ужина.",
-    weight: "1 кг",
-  },
-  4: {
-    title: "Фарш",
-    id: "4",
-    price: 400,
-    description:
-      "Смесь из свежей свинины и говядины, идеально подходит для котлет и других блюд.",
-    weight: "1 кг",
-  },
-};
+const basket: { [key: number]: Basket } = {};
 
 const basketStore = create<StoreState>((set, get) => ({
   basket,
@@ -112,7 +96,7 @@ const basketStore = create<StoreState>((set, get) => ({
     const state = get(); // Используем get для доступа к текущему состоянию
     let sum = 0;
     _.forEach(state.basket, (item) => {
-      sum += item.price * (item.quantity || 1);
+      sum += item.attributes.price * (item.quantity || 1);
     });
     return sum;
   },

@@ -8,9 +8,15 @@
 
 // Logo
 
+.header{
+    display: flex;
+    flex-direction: row;
+}
+
 .containerLogo{
     display: flex;
     justify-content: center;
+    margin: 0 auto;
 }
 
 // Catalog Tabs
@@ -51,4 +57,52 @@
 .activeTab{
     background-color: #DC143C;
     color: #f9f9f9;
+}
+
+// Burger menu
+
+.BurgerContainer {
+    position: relative;
+    left: -15px;
+    top: 7px;
+    z-index: 2;
+    cursor: pointer;
+}
+
+.SideMenu {
+  position: fixed;
+  top: 0;
+  left: -250px;
+  width: 250px;
+  height: 100%;
+  background-color: rgba(62, 62, 62, 0.9);
+  color: white;
+  transition: transform 0.3s ease;
+  transform: translateX(0);
+  z-index: 1;
+}
+
+.MenuOpen {
+  transform: translateX(250px);
+}
+
+.MenuClosed {
+  transform: translateX(0);
+}
+
+.MenuContent {
+  padding: 20px;
+  margin-left: 30px;
+  margin-top: 60px;
+}
+
+.MenuItem{
+    font-size: 20px;
+    padding: 10px;
+    cursor: pointer;
+    transition: font-size 0.3s ease;
+}
+
+.MenuItem:hover{
+    font-size: 22px;
 }

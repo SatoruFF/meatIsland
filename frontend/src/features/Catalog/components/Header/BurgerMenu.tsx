@@ -1,8 +1,8 @@
 import { useState } from "react";
 import { MenuOutlined, CloseOutlined } from "@ant-design/icons";
-import styles from "../stylesBody.module.less";
+import styles from "./styles.module.less";
 import { useNavigate } from "react-router-dom";
-import { PATHS } from "../../../../../constants/paths";
+import { PATHS } from "../../../../constants/paths";
 
 const BurgerMenu = () => {
   const [isMenuOpen, setMenuOpen] = useState(false);

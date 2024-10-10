@@ -98,6 +98,12 @@
 .maps__right-side-map{
     padding: 0 40px;
     flex-direction: column;
+    @media (max-width: 600px) {
+        padding: 0 20px;
+    }
+    @media (max-width: 400px) {
+        padding: 0;
+    }
 }
 
 .titleMap{
@@ -111,6 +117,8 @@
 
 // Медиазапросы
 @media screen and (max-width: 992px) {
+
+
     .ContainerMaps{
         flex-direction: column;
     }

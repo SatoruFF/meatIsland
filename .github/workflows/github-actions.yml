@@ -23,7 +23,7 @@ jobs:
         env:
           SERVER_IP: ${{ secrets.SERVER_IP }}
           SERVER_USER: ${{ secrets.SERVER_USER }}
-          SERVER_PASSWORD: ${{ secrets.SERVER_PASSWORD }}
+          SSHPASS: ${{ secrets.SERVER_PASSWORD }}
         run: echo "Frontend changes detected, deploying frontend"
 
       - name: SSH Deploy Frontend
@@ -31,9 +31,9 @@ jobs:
         env:
           SERVER_IP: ${{ secrets.SERVER_IP }}
           SERVER_USER: ${{ secrets.SERVER_USER }}
-          SERVER_PASSWORD: ${{ secrets.SERVER_PASSWORD }}
+          SSHPASS: ${{ secrets.SERVER_PASSWORD }}
         run: |
-          sshpass -p ${{ env.SERVER_PASSWORD }} ssh -o StrictHostKeyChecking=no ${{ env.SERVER_USER }}@${{ env.SERVER_IP }} << 'EOF'
+          sshpass -e ssh -o StrictHostKeyChecking=no ${{ env.SERVER_USER }}@${{ env.SERVER_IP }} << 'EOF'
             cd /var/www && rm -rf dist
             cd /root/core/meatIsland/frontend
             git pull
@@ -48,7 +48,7 @@ jobs:
         env:
           SERVER_IP: ${{ secrets.SERVER_IP }}
           SERVER_USER: ${{ secrets.SERVER_USER }}
-          SERVER_PASSWORD: ${{ secrets.SERVER_PASSWORD }}
+          SSHPASS: ${{ secrets.SERVER_PASSWORD }}
         run: echo "Backend changes detected, deploying backend"
 
       - name: SSH Deploy Backend
@@ -56,9 +56,9 @@ jobs:
         env:
           SERVER_IP: ${{ secrets.SERVER_IP }}
           SERVER_USER: ${{ secrets.SERVER_USER }}
-          SERVER_PASSWORD: ${{ secrets.SERVER_PASSWORD }}
+          SSHPASS: ${{ secrets.SERVER_PASSWORD }}
         run: |
-          sshpass -p ${{ env.SERVER_PASSWORD }} ssh -o StrictHostKeyChecking=no ${{ env.SERVER_USER }}@${{ env.SERVER_IP }} << 'EOF'
+          sshpass -e ssh -o StrictHostKeyChecking=no ${{ env.SERVER_USER }}@${{ env.SERVER_IP }} << 'EOF'
             cd /root/core/meatIsland/backend
             git pull
             npm install

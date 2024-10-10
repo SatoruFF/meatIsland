@@ -35,11 +35,11 @@ jobs:
         run: |
           sshpass -p ${{ env.SERVER_PASSWORD }} ssh -o StrictHostKeyChecking=no ${{ env.SERVER_USER }}@${{ env.SERVER_IP }} << 'EOF'
             cd /var/www && rm -rf dist
-            cd /root/core/meatIseland/frontend
+            cd /root/core/meatIsland/frontend
             git pull
             npm install
             npm run build
-            mv /root/core/meatIseland/frontend/dist /var/www
+            mv /root/core/meatIsland/frontend/dist /var/www
             sudo systemctl restart nginx
           EOF
 
@@ -59,7 +59,7 @@ jobs:
           SERVER_PASSWORD: ${{ secrets.SERVER_PASSWORD }}
         run: |
           sshpass -p ${{ env.SERVER_PASSWORD }} ssh -o StrictHostKeyChecking=no ${{ env.SERVER_USER }}@${{ env.SERVER_IP }} << 'EOF'
-            cd /root/core/meatIseland/backend
+            cd /root/core/meatIsland/backend
             git pull
             npm install
             npm run build

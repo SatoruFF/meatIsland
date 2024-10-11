@@ -14,12 +14,8 @@ jobs:
         uses: actions/checkout@v3
 
       - name: Access to Server, Pull Git Changes, Rebuild and Restart Docker Compose
-        env:
-          SERVER_IP: 45.12.75.103
-          SERVER_USER: root
-          SSHPASS: ${{ secrets.SERVER_PASSWORD }}
         run: |
-          sshpass -e ssh -o StrictHostKeyChecking=no ${{ env.SERVER_USER }}@${{ env.SERVER_IP }} "
+          sshpass -e ssh -o StrictHostKeyChecking=no ${{ vars.SERVER_USER }}@${{ vars.SERVER_IP }} "
           echo ✅ SSH connection successful &&
           cd /root/core/meatIsland &&
           echo ✅ Pulling from GitHub &&
@@ -35,6 +31,8 @@ jobs:
           echo ✅ Rebuilding and starting Docker Compose containers &&
           docker-compose down &&
           docker-compose up -d --build &&
+          echo ✅ Cleaning up unused Docker images and containers &&
+          docker system prune -af --volumes &&
           echo ✅ Starting Nginx &&
           sudo systemctl start nginx &&
           echo ✅ Deployment completed successfully

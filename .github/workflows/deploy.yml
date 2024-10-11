@@ -24,6 +24,8 @@ jobs:
           cd /root/core/meatIsland &&
           echo ✅ Pulling from GitHub &&
           git pull &&
+          echo ✅ Stopping running Nginx &&
+          sudo systemctl stop nginx && 
           echo ✅ Stopping running Docker containers &&
           running_containers=\$(docker ps -q) &&
           if [ -n \"\$running_containers\" ]; then
@@ -33,7 +35,7 @@ jobs:
           echo ✅ Rebuilding and starting Docker Compose containers &&
           docker-compose down &&
           docker-compose up -d --build &&
-          echo ✅ Restarting Nginx &&
-          sudo systemctl restart nginx &&
+          echo ✅ Starting Nginx &&
+          sudo systemctl start nginx &&
           echo ✅ Deployment completed successfully
           "

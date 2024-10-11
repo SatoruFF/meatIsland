@@ -12,7 +12,7 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v3
-        
+
       - name: Access to Server, Pull Git Changes, Rebuild and Restart Docker Compose
         env:
           SERVER_USER: ${{ secrets.SERVER_USER }}
@@ -22,6 +22,8 @@ jobs:
           sshpass -e ssh -o StrictHostKeyChecking=no $SERVER_USER@$SERVER_IP"
           echo ✅ SSH connection successful &&
           cd /root/core/meatIsland &&
+          echo ✅ Cleaning up unused Docker images and containers &&
+          docker system prune -af --volumes &&
           echo ✅ Pulling from GitHub &&
           git pull &&
           echo ✅ Stopping running Nginx &&
@@ -35,8 +37,6 @@ jobs:
           echo ✅ Rebuilding and starting Docker Compose containers &&
           docker-compose down &&
           docker-compose up -d --build &&
-          echo ✅ Cleaning up unused Docker images and containers &&
-          docker system prune -af --volumes &&
           echo ✅ Starting Nginx &&
           sudo systemctl start nginx &&
           echo ✅ Deployment completed successfully

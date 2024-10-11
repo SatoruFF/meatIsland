@@ -1,4 +1,4 @@
-version: '3.8'
+version: "3.8"
 
 networks:
   prod:
@@ -11,8 +11,8 @@ services:
       - "80:80"
       - "443:443"
     volumes:
-      - './nginx.conf:/etc/nginx/nginx.conf'
-      - '/etc/letsencrypt:/etc/letsencrypt' 
+      - "./nginx.conf:/etc/nginx/nginx.conf"
+      - "/etc/letsencrypt:/etc/letsencrypt"
     depends_on:
       - backend
       - frontend
@@ -23,7 +23,7 @@ services:
     container_name: backend
     build:
       context: ./backend
-    env_file: 
+    env_file:
       - ./.env
     networks:
       - prod
@@ -34,7 +34,7 @@ services:
     container_name: frontend
     build:
       context: ./frontend
-    env_file: 
+    env_file:
       - ./.env
     networks:
       - prod
@@ -46,6 +46,8 @@ services:
   portainer:
     container_name: portainer
     image: portainer/portainer-ce
+    networks:
+      - prod
     ports:
       - "9000:9000"
     volumes:

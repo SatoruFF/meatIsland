@@ -7,10 +7,7 @@ WORKDIR /app
 COPY package*.json ./ 
 
 # Устанавливаем зависимости
-RUN npm install
-
-# Проблема с модулем sharp
-RUN npm install --arch=arm64 --platform=linuxmusl sharp
+RUN npm install --ignore-scripts=false --verbose
 
 # Копируем все файлы проекта в контейнер
 COPY . .

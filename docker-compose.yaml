@@ -44,6 +44,7 @@ services:
       - "5173:5173"
 
   portainer_service:
+    container_name: portainer
     image: portainer/portainer-ce
     ports:
       - "9000:9000"

@@ -18,11 +18,6 @@ COPY . .
 # Выполняем сборку Strapi
 RUN npm run build
 
-# development runner (ARM/M1 compatible)
-FROM --platform=linux/amd64 node:18-alpine AS runner
-
-COPY --from=development . .
-
 # Открываем порты (по умолчанию Strapi использует 1337)
 EXPOSE 1337
 

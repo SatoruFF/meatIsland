@@ -4,21 +4,21 @@ networks:
   prod:
 
 services:
-  nginx:
+  web_server:
     image: nginx:stable-alpine
     ports:
       - "80:80"
       - "443:443"
     volumes:
       - './frontend/nginx.conf:/etc/nginx/nginx.conf'
-      - '/etc/letsencrypt:/etc/letsencrypt'
+      - '/etc/letsencrypt:/etc/letsencrypt' 
     depends_on:
-      - backend
-      - frontend
+      - api_backend
+      - frontend_app
     networks:
       - prod
 
-  backend:
+  api_backend:
     build:
       context: ./backend
     env_file: 
@@ -28,7 +28,7 @@ services:
     volumes:
       - ./backend:/app
 
-  frontend:
+  frontend_app:
     build:
       context: ./frontend
     env_file: 
@@ -40,13 +40,13 @@ services:
     ports:
       - "5173:5173"
 
-  portainer:
+  portainer_service:
     image: portainer/portainer-ce
     ports:
-      - "9000:9000"  # доступ к Portainer через порт 9000
+      - "9000:9000"
     volumes:
-      - /var/run/docker.sock:/var/run/docker.sock  # доступ к Docker
-      - portainer_data:/data  # хранилище данных Portainer
+      - /var/run/docker.sock:/var/run/docker.sock
+      - portainer_data:/data
 
 volumes:
-  portainer_data:  # создание именованного тома для данных Portainer
+  portainer_data:

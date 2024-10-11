@@ -1,10 +1,17 @@
 FROM node:18-alpine
 
+# Установка необходимых зависимостей для sharp
+RUN apk add --no-cache \
+    vips-dev \
+    gcc \
+    g++ \
+    make
+
 # Установка рабочей директории
 WORKDIR /app
 
 # Копируем package.json и package-lock.json (если он есть)
-COPY package*.json ./
+COPY package*.json ./ 
 
 # Устанавливаем зависимости
 RUN npm install
@@ -19,5 +26,4 @@ RUN npm run build
 EXPOSE 1337
 
 # Команда для запуска Strapi в режиме разработки 
-# (запускаем в этом режиме потому что нам не нужно терять доступ к мутации коллекции данных)
 CMD ["npm", "run", "dev"]

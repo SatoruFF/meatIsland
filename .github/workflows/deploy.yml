@@ -15,7 +15,7 @@ jobs:
 
       - name: Access to Server, Pull Git Changes, Rebuild and Restart Docker Compose
         run: |
-          sshpass -e ssh -o StrictHostKeyChecking=no ${{ vars.SERVER_USER }}@${{ vars.SERVER_IP }} "
+          sshpass -e ssh -o StrictHostKeyChecking=no ${{ secrets.SERVER_USER }}@${{ secrets.SERVER_IP }} "
           echo ✅ SSH connection successful &&
           cd /root/core/meatIsland &&
           echo ✅ Pulling from GitHub &&

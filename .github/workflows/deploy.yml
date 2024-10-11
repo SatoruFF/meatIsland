@@ -15,14 +15,25 @@ jobs:
 
       - name: Access to Server, Pull Git Changes, Rebuild and Restart Docker Compose
         env:
-          SERVER_IP: ${{ secrets.SERVER_IP }}
-          SERVER_USER: ${{ secrets.SERVER_USER }}
-          SSHPASS: ${{ secrets.SERVER_PASSWORD }}
+          SERVER_IP: 45.12.75.103
+          SERVER_USER: root
+          SSHPASS: ${{ secrets.SERVER_PASSWORD }}  # Убедитесь, что вы добавили этот секрет в GitHub
         run: |
-          sshpass -e ssh -o StrictHostKeyChecking=no ${{ env.SERVER_USER }}@${{ env.SERVER_IP }} << 'EOF'
-            cd /root/core/meatIsland
-            git pull
-            docker-compose down
-            docker-compose up -d --build
-            sudo systemctl restart nginx
-          EOF
+          sshpass -e ssh -o StrictHostKeyChecking=no ${{ env.SERVER_USER }}@${{ env.SERVER_IP }} "
+          echo ✅ SSH connection successful &&
+          cd /root/core/meatIsland &&
+          echo ✅ Pulling from GitHub &&
+          git pull &&
+          echo ✅ Stopping running Docker containers &&
+          running_containers=\$(docker ps -q) &&
+          if [ -n \"\$running_containers\" ]; then
+            docker stop \$running_containers &&
+            docker rm \$running_containers
+          fi &&
+          echo ✅ Rebuilding and starting Docker Compose containers &&
+          docker-compose down &&
+          docker-compose up -d --build &&
+          echo ✅ Restarting Nginx &&
+          sudo systemctl restart nginx &&
+          echo ✅ Deployment completed successfully
+          "

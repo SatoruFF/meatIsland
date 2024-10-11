@@ -21,25 +21,21 @@ jobs:
         run: |
           sshpass -e ssh -o StrictHostKeyChecking=no ${{ env.SERVER_USER }}@${{ env.SERVER_IP }} "
           echo ✅ SSH connection successful &&
-          cd /root/core/meatIsland || { echo '❌ Failed to change directory'; exit 1; } &&
-          echo ✅ Current directory: \$(pwd) &&
+          cd /root/core/meatIsland &&
           echo ✅ Pulling from GitHub &&
-          git pull || { echo '❌ Git pull failed'; exit 1; } &&
+          git pull &&
           echo ✅ Stopping running Nginx &&
-          sudo systemctl stop nginx || { echo '❌ Failed to stop Nginx'; exit 1; } && 
+          sudo systemctl stop nginx && 
           echo ✅ Stopping running Docker containers &&
           running_containers=\$(docker ps -q) &&
           if [ -n \"\$running_containers\" ]; then
-            echo ✅ Stopping containers: \$running_containers &&
-            docker stop \$running_containers || { echo '❌ Failed to stop containers'; exit 1; } &&
-            docker rm \$running_containers || { echo '❌ Failed to remove containers'; exit 1; }
-          else
-            echo ✅ No running containers found
+            docker stop \$running_containers &&
+            docker rm \$running_containers
           fi &&
           echo ✅ Rebuilding and starting Docker Compose containers &&
-          docker-compose down || { echo '❌ Failed to bring down containers'; exit 1; } &&
-          docker-compose up -d --build || { echo '❌ Failed to build and start containers'; exit 1; } &&
+          docker-compose down &&
+          docker-compose up -d --build &&
           echo ✅ Starting Nginx &&
-          sudo systemctl start nginx || { echo '❌ Failed to start Nginx'; exit 1; } &&
+          sudo systemctl start nginx &&
           echo ✅ Deployment completed successfully
           "

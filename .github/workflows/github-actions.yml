@@ -26,7 +26,7 @@ jobs:
           SSHPASS: ${{ secrets.SERVER_PASSWORD }}
         run: echo "Frontend changes detected, deploying frontend"
 
-      - name: SSH Deploy Frontend
+      - name: SSH Deploy Frontend via Docker Compose
         if: ${{ env.CHANGED_FILES }} && contains(env.CHANGED_FILES, 'frontend/')
         env:
           SERVER_IP: ${{ secrets.SERVER_IP }}
@@ -34,12 +34,10 @@ jobs:
           SSHPASS: ${{ secrets.SERVER_PASSWORD }}
         run: |
           sshpass -e ssh -o StrictHostKeyChecking=no ${{ env.SERVER_USER }}@${{ env.SERVER_IP }} << 'EOF'
-            cd /var/www && rm -rf dist
-            cd /root/core/meatIsland/frontend
+            cd /root/core/meatIsland
             git pull
-            npm install
-            npm run build
-            mv /root/core/meatIsland/frontend/dist /var/www
+            docker-compose down
+            docker-compose up -d --build
             sudo systemctl restart nginx
           EOF
 
@@ -51,7 +49,7 @@ jobs:
           SSHPASS: ${{ secrets.SERVER_PASSWORD }}
         run: echo "Backend changes detected, deploying backend"
 
-      - name: SSH Deploy Backend
+      - name: SSH Deploy Backend via Docker Compose
         if: ${{ env.CHANGED_FILES }} && contains(env.CHANGED_FILES, 'backend/')
         env:
           SERVER_IP: ${{ secrets.SERVER_IP }}
@@ -59,9 +57,9 @@ jobs:
           SSHPASS: ${{ secrets.SERVER_PASSWORD }}
         run: |
           sshpass -e ssh -o StrictHostKeyChecking=no ${{ env.SERVER_USER }}@${{ env.SERVER_IP }} << 'EOF'
-            cd /root/core/meatIsland/backend
+            cd /root/core/meatIsland
             git pull
-            npm install
-            npm run build
-            NODE_ENV=production pm2 start --name APP_NAME npm -- start
+            docker-compose down
+            docker-compose up -d --build
+            sudo systemctl restart nginx
           EOF

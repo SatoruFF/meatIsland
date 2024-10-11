@@ -6,6 +6,7 @@ networks:
 services:
   web_server:
     image: nginx:stable-alpine
+    container_name: nginx
     ports:
       - "80:80"
       - "443:443"
@@ -13,12 +14,13 @@ services:
       - './frontend/nginx.conf:/etc/nginx/nginx.conf'
       - '/etc/letsencrypt:/etc/letsencrypt' 
     depends_on:
-      - api_backend
-      - frontend_app
+      - backend
+      - frontend
     networks:
       - prod
 
-  api_backend:
+  backend:
+    container_name: backend
     build:
       context: ./backend
     env_file: 
@@ -28,7 +30,8 @@ services:
     volumes:
       - ./backend:/app
 
-  frontend_app:
+  frontend:
+    container_name: frontend
     build:
       context: ./frontend
     env_file: 

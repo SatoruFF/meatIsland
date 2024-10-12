@@ -17,6 +17,10 @@ COPY package*.json ./
 # Устанавливаем зависимости и sharp для linuxmusl
 RUN npm install --ignore-scripts=false --platform=linuxmusl --arch=x64 --verbose
 
+# Пересобираем sharp
+# workaround: https://github.com/gatsbyjs/gatsby/issues/24559
+RUN npm rebuild --verbose sharp
+
 # Копируем все файлы проекта в контейнер
 COPY . .
 

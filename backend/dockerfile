@@ -1,13 +1,5 @@
 FROM node:18.1.0-bullseye-slim
 
-# Устанавливаем необходимые зависимости для сборки sharp
-RUN apk add --no-cache \
-    libc6-compat \
-    g++ \
-    make \
-    python3 \
-    vips-dev
-
 # Установка рабочей директории
 WORKDIR /app
 

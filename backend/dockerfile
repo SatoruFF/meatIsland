@@ -1,4 +1,4 @@
-FROM node:18-alpine
+FROM node:21-alpine3.18
 
 # Устанавливаем необходимые зависимости для сборки sharp
 RUN apk add --no-cache \

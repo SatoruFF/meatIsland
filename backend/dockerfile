@@ -1,13 +1,21 @@
 FROM node:18-alpine
 
+# Устанавливаем необходимые зависимости для сборки sharp
+RUN apk add --no-cache \
+    libc6-compat \
+    g++ \
+    make \
+    python3 \
+    vips-dev
+
 # Установка рабочей директории
 WORKDIR /app
 
 # Копируем package.json и package-lock.json (если он есть)
 COPY package*.json ./ 
 
-# Устанавливаем зависимости
-RUN npm install --ignore-scripts=false --verbose
+# Устанавливаем зависимости и sharp для linuxmusl
+RUN npm install --ignore-scripts=false --platform=linuxmusl --arch=x64 --verbose
 
 # Копируем все файлы проекта в контейнер
 COPY . .

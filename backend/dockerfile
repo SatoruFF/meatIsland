@@ -14,6 +14,8 @@ WORKDIR /app
 # Копируем package.json и package-lock.json (если он есть)
 COPY package*.json ./ 
 
+RUN rm -rf node_modules
+
 # Устанавливаем зависимости и sharp для linuxmusl
 RUN npm install
 
@@ -21,7 +23,7 @@ RUN npm install --cpu=x64 --os=linux --libc=musl sharp
 
 # Пересобираем sharp
 # workaround: https://github.com/gatsbyjs/gatsby/issues/24559
-# RUN npm rebuild --verbose sharp
+RUN npm rebuild --verbose sharp
 
 # Копируем все файлы проекта в контейнер
 COPY . .

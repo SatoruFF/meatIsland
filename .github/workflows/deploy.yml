@@ -27,7 +27,7 @@ jobs:
           echo ✅ Pulling from GitHub &&
           git pull &&
           echo ✅ Stopping running Docker containers, excluding portainer &&
-          running_containers=\$(docker ps --filter \"name!=portainer\" -q) &&
+          running_containers=\$(docker ps -q | grep -v \$(docker ps -q --filter \"name=portainer\")) &&
           if [ -n \"\$running_containers\" ]; then
             docker stop \$running_containers &&
             docker rm \$running_containers

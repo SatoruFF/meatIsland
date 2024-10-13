@@ -22,12 +22,14 @@ jobs:
           sshpass -e ssh -o StrictHostKeyChecking=no $SERVER_USER@$SERVER_IP"
           echo ✅ SSH connection successful &&
           cd /root/core/meatIsland &&
-          echo ✅ Cleaning up unused Docker images and containers &&
-          docker system prune -af --volumes &&
+          echo ✅ Keeping Portainer running &&
+          portainer_container=\$(docker ps -q --filter name=portainer) &&
+          echo ✅ Cleaning up unused Docker images and containers (except Portainer) &&
+          docker system prune -af --volumes --filter "label!=portainer" &&
           echo ✅ Pulling from GitHub &&
           git pull &&
-          echo ✅ Stopping running Docker containers &&
-          running_containers=\$(docker ps -q) &&
+          echo ✅ Stopping running Docker containers (except Portainer) &&
+          running_containers=\$(docker ps -q | grep -v \$portainer_container) &&
           if [ -n \"\$running_containers\" ]; then
             docker stop \$running_containers &&
             docker rm \$running_containers

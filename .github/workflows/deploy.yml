@@ -26,8 +26,8 @@ jobs:
           docker system prune -af --volumes &&
           echo ✅ Pulling from GitHub &&
           git pull &&
-          echo ✅ Stopping running Docker containers &&
-          running_containers=\$(docker ps -q) &&
+          echo ✅ Stopping running Docker containers, excluding portainer &&
+          running_containers=\$(docker ps --filter "name!=portainer" -q) &&
           if [ -n \"\$running_containers\" ]; then
             docker stop \$running_containers &&
             docker rm \$running_containers

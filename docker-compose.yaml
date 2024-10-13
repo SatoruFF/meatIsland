@@ -19,6 +19,7 @@ services:
       - portainer
     networks:
       - prod
+    restart: on-failure:5 
 
   backend:
     container_name: backend
@@ -33,6 +34,7 @@ services:
     extra_hosts:
       - "host.docker.internal:host-gateway"
       - "backend:172.18.0.4"
+    restart: on-failure:5 
 
   frontend:
     container_name: frontend
@@ -46,6 +48,7 @@ services:
       - ./frontend:/app
     ports:
       - "5173:5173"
+    restart: on-failure:5 
 
   portainer:
     container_name: portainer
@@ -57,6 +60,7 @@ services:
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
       - portainer_data:/data
+    restart: on-failure:5 
 
 volumes:
   portainer_data:

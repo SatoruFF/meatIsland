@@ -9,7 +9,9 @@ const Header = () => {
     <div className={styles.headerContainer}>
       <div className={styles.header}>
         <BurgerMenu />
-        <Logo />
+        <div className={styles.catalogContainerLogo}>
+          <Logo />
+        </div>
       </div>
       <div className={styles.containerCatalogTabs}>
         <CatalogTabs />

@@ -11,7 +11,10 @@ COPY package*.json ./
 RUN npm install 
 
 # Копируем остальные файлы проекта
-COPY . . 
+COPY . .
+
+# Копируем файл robots.txt
+COPY robots.txt ./
 
 # Выполняем сборку фронтенда
 RUN npm run build 

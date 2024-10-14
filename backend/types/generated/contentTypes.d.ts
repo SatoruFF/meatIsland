@@ -793,7 +793,7 @@ export interface ApiCategoryCategory extends Schema.CollectionType {
   info: {
     singularName: 'category';
     pluralName: 'categories';
-    displayName: 'category';
+    displayName: '\u041A\u0430\u0442\u0435\u0433\u043E\u0440\u0438\u0438';
     description: '';
   };
   options: {
@@ -828,7 +828,7 @@ export interface ApiProductProduct extends Schema.CollectionType {
   info: {
     singularName: 'product';
     pluralName: 'products';
-    displayName: 'product';
+    displayName: '\u041F\u0440\u043E\u0434\u0443\u043A\u0442\u044B';
     description: '';
   };
   options: {
@@ -853,6 +853,7 @@ export interface ApiProductProduct extends Schema.CollectionType {
       'api::sale.sale'
     >;
     tradePrice: Attribute.Float;
+    recommendation: Attribute.Boolean & Attribute.DefaultTo<false>;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     createdBy: Attribute.Relation<
@@ -875,7 +876,7 @@ export interface ApiSaleSale extends Schema.CollectionType {
   info: {
     singularName: 'sale';
     pluralName: 'sales';
-    displayName: 'sale';
+    displayName: '\u0421\u043A\u0438\u0434\u043A\u0438';
     description: '';
   };
   options: {

@@ -1,11 +1,12 @@
 import _ from "lodash";
+import React, { useEffect, useState, useCallback } from "react";
+import { useParams } from "react-router-dom";
+import { message, Spin } from "antd";
+
 import basketStore from "../../../../../store/storeBascet";
 import styles from "../stylesBody.module.less";
-import React, { useEffect, useState } from "react";
 import ProductModal from "./ProductModal";
-import { useLocation, useParams } from "react-router-dom";
 import { getProducts } from "../../../../../services/productService";
-import { message, Spin } from "antd";
 
 interface CategoryAttributes {
   name: string;
@@ -44,48 +45,29 @@ const ProductItem = React.memo(() => {
   const { addToBasket } = basketStore();
 
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [openItemModal, setOpenItemModal] = useState({});
+  const [openItemModal, setOpenItemModal] = useState<IProduct | null>(null);
   const [products, setProducts] = useState<IProduct[]>([]);
-  const [filteredProducts, setFilteredProducts] = useState<IProduct[]>([]);
   const [isLoading, setIsLoading] = useState(false);
 
-  // TODO: Нужно отправлять запрос с фильтрацией, а не фильтровать тут
-  const filterProductsByCategory = (categoryId: number) => {
-    const filtered = products.filter((p: IProduct) => {
-      const { attributes } = p;
-      const currentCategoryRelation = _.get(attributes, [
-        "category",
-        "data",
-        "id",
-      ]);
-      return currentCategoryRelation === categoryId;
-    });
-    setFilteredProducts(filtered);
-  };
-
-  // Вызов фильтрации при изменении категории
-  useEffect(() => {
-    if (queryCategoryId && products.length) {
-      filterProductsByCategory(Number(queryCategoryId));
+  const fetchProductsByCategory = useCallback(async () => {
+    try {
+      setIsLoading(true);
+      const queryByCategory = queryCategoryId
+        ? `?filters[category]=${queryCategoryId}`
+        : "";
+      const { data } = await getProducts(queryByCategory);
+      setProducts(_.sortBy(data, 'id'));
+    } catch (e: any) {
+      console.error(e.message);
+      message.error("Что-то пошло не так при загрузке товаров.");
+    } finally {
+      setIsLoading(false);
     }
-  }, [queryCategoryId, products]);
+  }, [queryCategoryId]);
 
-  // Загрузка продуктов
   useEffect(() => {
-    const fetchProducts = async () => {
-      try {
-        setIsLoading(true);
-        const { data } = await getProducts();
-        setProducts(data);
-      } catch (e: any) {
-        console.error(e.message);
-        message.error("Что-то пошло не так при загрузке товаров.");
-      } finally {
-        setIsLoading(false);
-      }
-    };
-    fetchProducts();
-  }, []);
+    fetchProductsByCategory();
+  }, [fetchProductsByCategory]);
 
   const addToBasketClick = (item: IProduct) => {
     addToBasket(item);
@@ -106,49 +88,55 @@ const ProductItem = React.memo(() => {
   }
 
   if (!products.length) {
-    return (
-      <h1 className={styles.titleDontProduct}>
-        В данной категории к сожалению нет товаров
-      </h1>
-    );
+    return <h1> В данной категории нет товаров </h1>;
   }
 
   return (
     <div className={styles.gridContainer}>
-      {_.map(filteredProducts, (item: IProduct) => (
-        <div key={item.id}>
-          <div key={item.id} className={styles.item}>
-            <div onClick={() => openModal(item)}>
-              <img
-                className={styles.imageItem}
-                src="https://roscontrol.com/files/original_images/articles/94/cf/94cfa966daf5ef5409cb.jpg"
-                alt={item.attributes.name}
-              />
-              <div className={styles.itemContent}>
-                <h3 className={styles.title}>{item.attributes.name}</h3>
-                <p className={styles.description}>
-                  {item.attributes.description}
-                </p>
-              </div>
-            </div>
-            <div className={styles.footerItemCard}>
+      {products.map((item: IProduct) => (
+        <div key={item.id} className={styles.item}>
+          <div onClick={() => openModal(item)}>
+            <img
+              className={styles.imageItem}
+              src={
+                _.get(item, [
+                  "attributes",
+                  "image",
+                  "data",
+                  "0",
+                  "attributes",
+                  "url",
+                ]) ||
+                "https://roscontrol.com/files/original_images/articles/94/cf/94cfa966daf5ef5409cb.jpg"
+              }
+              alt={item.attributes.name}
+            />
+            <div className={styles.itemContent}>
+              <h3 className={styles.title}>{item.attributes.name}</h3>
+              <p className={styles.description}>
+                {item.attributes.description}
+              </p>
               <div className={styles.numInfo}>
                 <p className={styles.price}>{item.attributes.price} ₽</p>
-                <p className={styles.weight}>{item.attributes.weight}</p>
-              </div>
-              <div onClick={() => addToBasket(item)} className={styles.addBtn}>
-                <p>Добавить в корзину</p>
+                {item.attributes.weight && (
+                  <p className={styles.weight}>{item.attributes.weight} кг</p>
+                )}
               </div>
             </div>
           </div>
+          <div onClick={() => addToBasket(item)} className={styles.addBtn}>
+            <p>Добавить в корзину</p>
+          </div>
         </div>
       ))}
-      <ProductModal
-        item={openItemModal}
-        isOpen={isModalOpen}
-        onClose={cancelModal}
-        addToBasket={addToBasketClick}
-      />
+      {openItemModal && (
+        <ProductModal
+          item={openItemModal}
+          isOpen={isModalOpen}
+          onClose={cancelModal}
+          addToBasket={addToBasketClick}
+        />
+      )}
     </div>
   );
 });

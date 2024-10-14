@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Загружаем переменные из .env файла
-export $(grep -v '^#' .env | xargs)
+export $(grep -v '^#' /root/core/meatIsland/.env | xargs)
 
 # Проверка, что все переменные заданы
 if [[ -z "$DB_HOST" || -z "$DB_PORT" || -z "$DB_NAME" || -z "$DB_USER" || -z "$DB_PASSWORD" ]]; then

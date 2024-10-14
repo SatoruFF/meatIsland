@@ -31,5 +31,5 @@ find ./dumps/ -type f -name "*.sql" -mtime +7 -exec rm {} \;
 
 # Далее выполнить
 # crontab -e
-# 0 0 * * * /path/to/project/dump_db.sh
-# chmod +x /path/to/project/dump_db.sh
+# 0 0 * * * /path/to/project/dump.sh # например каждый день в полночь
+# chmod +x /path/to/project/dump.sh

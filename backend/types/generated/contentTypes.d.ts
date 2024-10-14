@@ -876,7 +876,7 @@ export interface ApiSaleSale extends Schema.CollectionType {
   info: {
     singularName: 'sale';
     pluralName: 'sales';
-    displayName: '\u0421\u043A\u0438\u0434\u043A\u0438';
+    displayName: '\u0417\u0430\u043A\u0430\u0437\u044B';
     description: '';
   };
   options: {

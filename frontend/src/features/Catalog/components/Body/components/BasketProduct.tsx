@@ -60,7 +60,17 @@ const BasketProduct = () => {
             >
               <img
                 className={styles.imageBasketItem}
-                src="https://roscontrol.com/files/original_images/articles/94/cf/94cfa966daf5ef5409cb.jpg"
+                src={
+                  _.get(product, [
+                    "attributes",
+                    "image",
+                    "data",
+                    "0",
+                    "attributes",
+                    "url",
+                  ]) ||
+                  "https://roscontrol.com/files/original_images/articles/94/cf/94cfa966daf5ef5409cb.jpg"
+                }
                 alt={product.attributes.name}
               />
               <div className={styles.itemDetails}>

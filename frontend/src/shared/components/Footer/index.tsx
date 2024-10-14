@@ -23,7 +23,7 @@ const Footer = (props) => {
           <div className={styles.title}>Номер для заказов</div>
           <div>
             <p>
-              <a href="tel:+79308333811">+7 (930) 833-38-11</a>
+              <a href="tel:+7 (937) 615-26-44">+7 (937) 615-26-44</a>
             </p>
           </div>
         </div>

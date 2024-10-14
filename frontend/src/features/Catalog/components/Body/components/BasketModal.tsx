@@ -71,7 +71,7 @@ const BasketModal = ({ items, isOpen, onClose, countProduct, sumPrice }) => {
           <div className={styles.adressContainer}>
             <div style={{ marginBottom: 20 }}>
               <div>Заказать можно по телефоне:</div>
-              <a href="tel:+79308333811">+7 (930) 833-38-11</a>
+              <a href="tel:+7 (937) 615-26-44">+7 (937) 615-26-44</a>
             </div>
             <div>
               <div>или приобрести продукты в наших магазинах:</div>

@@ -26,6 +26,9 @@ else
   exit 1
 fi
 
+# Удаляем файлы, которым больше 7 дней
+find ./dumps/ -type f -name "*.sql" -mtime +7 -exec rm {} \;
+
 # Далее выполнить
 # crontab -e
 # 0 0 * * * /path/to/project/dump_db.sh

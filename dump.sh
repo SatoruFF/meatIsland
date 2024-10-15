@@ -33,3 +33,4 @@ find ./dumps/ -type f -name "*.sql" -mtime +7 -exec rm {} \;
 # crontab -e
 # 0 0 * * * /path/to/project/dump.sh # например каждый день в полночь
 # chmod +x /path/to/project/dump.sh
+# sudo service cron reload

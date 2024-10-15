@@ -11,8 +11,9 @@ RUN rm -rf node_modules
 # Устанавливаем зависимости и sharp для linuxmusl
 RUN npm install
 
+# FIXME: Возможны проблемы с модулем sharp, 
+# пока эта проблема рещена сменой базового образа с alpine на bullseye
 # RUN npm install --cpu=x64 --os=linux --libc=musl sharp
-
 # Пересобираем sharp
 # workaround: https://github.com/gatsbyjs/gatsby/issues/24559
 # RUN npm rebuild --verbose sharp

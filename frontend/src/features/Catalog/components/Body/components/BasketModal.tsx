@@ -1,6 +1,7 @@
-import { Modal } from "antd";
 import _ from "lodash";
+import { Modal } from "antd";
 import React, { useEffect, useState } from "react";
+
 import styles from "../stylesBody.module.less";
 
 const BasketModal = ({ items, isOpen, onClose, countProduct, sumPrice }) => {

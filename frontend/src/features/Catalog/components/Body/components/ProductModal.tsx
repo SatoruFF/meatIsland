@@ -34,7 +34,17 @@ const ProductModal = ({ item, isOpen, onClose, addToBasket }) => {
         <div className={styles.container}>
           <img
             className={styles.imageItem}
-            src="https://roscontrol.com/files/original_images/articles/94/cf/94cfa966daf5ef5409cb.jpg"
+            src={
+              _.get(item, [
+                "attributes",
+                "image",
+                "data",
+                "0",
+                "attributes",
+                "url",
+              ]) ||
+              "https://roscontrol.com/files/original_images/articles/94/cf/94cfa966daf5ef5409cb.jpg"
+            }
             alt={item.attributes.name}
           />
           <div className={styles.itemContent}>

@@ -43,7 +43,17 @@ const BasketModal = ({ items, isOpen, onClose, countProduct, sumPrice }) => {
                     <div className={styles.containerClick}>
                       <img
                         className={styles.imageBasketItem}
-                        src="https://roscontrol.com/files/original_images/articles/94/cf/94cfa966daf5ef5409cb.jpg"
+                        src={
+                          _.get(item, [
+                            "attributes",
+                            "image",
+                            "data",
+                            "0",
+                            "attributes",
+                            "url",
+                          ]) ||
+                          "https://roscontrol.com/files/original_images/articles/94/cf/94cfa966daf5ef5409cb.jpg"
+                        }
                         alt={product.attributes.title}
                       />
                       <div className={styles.itemDetails}>

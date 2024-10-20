@@ -49,14 +49,19 @@ const ProductItem = React.memo(() => {
   const [products, setProducts] = useState<IProduct[]>([]);
   const [isLoading, setIsLoading] = useState(false);
 
+  const getCachedProducts = _.memoize(async (query) => {
+    const { data } = await getProducts(query);
+    return _.sortBy(data, "id");
+  });
+
   const fetchProductsByCategory = useCallback(async () => {
     try {
       setIsLoading(true);
       const queryByCategory = queryCategoryId
         ? `?filters[category]=${queryCategoryId}`
-        : "";
-      const { data } = await getProducts(queryByCategory);
-      setProducts(_.sortBy(data, 'id'));
+        : `?filters[recommendation]=true`; // if not filtered by query, try fetch only recommended products
+      const products = await getCachedProducts(queryByCategory);
+      setProducts(products);
     } catch (e: any) {
       console.error(e.message);
       message.error("Что-то пошло не так при загрузке товаров.");

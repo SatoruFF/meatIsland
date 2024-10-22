@@ -4,7 +4,7 @@ import styles from "../stylesBody.module.less";
 import { useEffect, useState } from "react";
 import basketStore from "../../../../../store/storeBasket";
 import ProductModal from "./ProductModal";
-import BasketModal from "./BasketModal";
+import DeliveryModal from "./DeliveryModal";
 
 const BasketProduct = () => {
   const {
@@ -22,7 +22,7 @@ const BasketProduct = () => {
   const [sumPrice, setSumPrice] = useState<number>(0);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [openItemModal, setOpenItemModal] = useState({});
-  const [isOpenFormBasketModal, setOpenFormBasketModal] = useState(false);
+  const [isOpenFormDeliveryModal, setOpenFormDeliveryModal] = useState(false);
 
   const openModal = (item) => {
     setOpenItemModal(item);
@@ -30,12 +30,12 @@ const BasketProduct = () => {
   };
 
   const openFormModal = () => {
-    setOpenFormBasketModal(true);
+    setOpenFormDeliveryModal(true);
   };
 
   const cancelModal = () => {
     setIsModalOpen(false);
-    setOpenFormBasketModal(false);
+    setOpenFormDeliveryModal(false);
   };
 
   useEffect(() => {
@@ -119,9 +119,9 @@ const BasketProduct = () => {
         isOpen={isModalOpen}
         onClose={cancelModal}
       />
-      <BasketModal
+      <DeliveryModal
         items={basketProduct}
-        isOpen={isOpenFormBasketModal}
+        isOpen={isOpenFormDeliveryModal}
         onClose={cancelModal}
         countProduct={countProduct}
         sumPrice={sumPrice}

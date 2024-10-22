@@ -1,6 +1,6 @@
 import _ from "lodash";
 import qs from "qs";
-import cn from "classnames"
+import cn from "classnames";
 import { Outlet, useParams } from "react-router-dom";
 import { Input } from "antd";
 
@@ -25,10 +25,10 @@ const CatalogBody = () => {
     let queryObject: any = {
       filters: {},
     };
-  
+
     if (queryCategoryId) {
       queryObject.filters.category = queryCategoryId;
-  
+
       const searchValue = value.trim().toLowerCase();
       if (searchValue) {
         queryObject.filters.name = { $containsi: searchValue };
@@ -36,15 +36,14 @@ const CatalogBody = () => {
     } else {
       queryObject.filters.recommendation = true;
     }
-  
+
     const queryString = qs.stringify(queryObject, { encode: false });
-  
+
     const decodedQueryString = decodeURIComponent(queryString);
-  
+
     const products = await getCachedProducts(`?${decodedQueryString}`);
     setProducts(products);
   }, 300);
-  
 
   const handleSearchInput = (value: string) => {
     fetchSearchedProducts(value);
@@ -53,12 +52,12 @@ const CatalogBody = () => {
   return (
     <div className={styles.catalog}>
       <div className={styles.basketContainer}>
+        <BasketProduct />
         <Input
           onChange={(e) => handleSearchInput(e.target.value)}
           className={cn(styles.catalogSearch)}
           placeholder="Поиск товара..."
         />
-        <BasketProduct />
       </div>
       <div className={styles.categoryContainer}>
         <Outlet />

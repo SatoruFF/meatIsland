@@ -3,50 +3,20 @@ import React, { useEffect, useState, useCallback } from "react";
 import { useParams } from "react-router-dom";
 import { message, Spin } from "antd";
 
-import basketStore from "../../../../../store/storeBascet";
+import basketStore from "../../../../../store/storeBasket";
 import styles from "../stylesBody.module.less";
 import ProductModal from "./ProductModal";
 import { getProducts } from "../../../../../services/productService";
-
-interface CategoryAttributes {
-  name: string;
-  createdAt: string;
-  updatedAt: string;
-}
-
-interface CategoryData {
-  id: number;
-  attributes: CategoryAttributes;
-}
-
-interface ProductAttributes {
-  name: string;
-  price: number;
-  createdAt: string;
-  updatedAt: string;
-  description: string;
-  available: boolean;
-  weight: number | null;
-  StockQuantity: number | null;
-  tradePrice: number | null;
-  category: {
-    data: CategoryData;
-  };
-  image: string | null;
-}
-
-interface IProduct {
-  id: number;
-  attributes: ProductAttributes;
-}
+import useProducts from "../../../../../store/storeProducts";
 
 const ProductItem = React.memo(() => {
   const { id: queryCategoryId } = useParams();
   const { addToBasket } = basketStore();
+  const { setProducts } = useProducts();
+  const products = useProducts((state) => state.products);
 
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [openItemModal, setOpenItemModal] = useState<IProduct | null>(null);
-  const [products, setProducts] = useState<IProduct[]>([]);
+  const [openItemModal, setOpenItemModal] = useState<any>(null);
   const [isLoading, setIsLoading] = useState(false);
 
   const getCachedProducts = _.memoize(async (query) => {
@@ -74,12 +44,12 @@ const ProductItem = React.memo(() => {
     fetchProductsByCategory();
   }, [fetchProductsByCategory]);
 
-  const addToBasketClick = (item: IProduct) => {
+  const addToBasketClick = (item: any) => {
     addToBasket(item);
     setIsModalOpen(false);
   };
 
-  const openModal = (item: IProduct) => {
+  const openModal = (item: any) => {
     setOpenItemModal(item);
     setIsModalOpen(true);
   };
@@ -98,7 +68,7 @@ const ProductItem = React.memo(() => {
 
   return (
     <div className={styles.gridContainer}>
-      {products.map((item: IProduct) => (
+      {products.map((item: any) => ( // FIXME: set type in product store
         <div key={item.id} className={styles.item}>
           <div onClick={() => openModal(item)}>
             <img

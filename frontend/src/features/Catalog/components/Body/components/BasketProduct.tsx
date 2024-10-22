@@ -2,7 +2,7 @@ import _ from "lodash";
 import { MinusOutlined, PlusOutlined } from "@ant-design/icons";
 import styles from "../stylesBody.module.less";
 import { useEffect, useState } from "react";
-import basketStore from "../../../../../store/storeBascet";
+import basketStore from "../../../../../store/storeBasket";
 import ProductModal from "./ProductModal";
 import BasketModal from "./BasketModal";
 

@@ -50,17 +50,21 @@ const CatalogBody = () => {
   };
 
   return (
-    <div className={styles.catalog}>
-      <div className={styles.basketContainer}>
-        <BasketProduct />
+    <div>
+      <div className={styles.catalogSearchContainer}>
         <Input
           onChange={(e) => handleSearchInput(e.target.value)}
           className={cn(styles.catalogSearch)}
           placeholder="Поиск товара..."
         />
       </div>
-      <div className={styles.categoryContainer}>
-        <Outlet />
+      <div className={styles.catalog}>
+        <div className={styles.basketContainer}>
+          <BasketProduct />
+        </div>
+        <div className={styles.categoryContainer}>
+          <Outlet />
+        </div>
       </div>
     </div>
   );

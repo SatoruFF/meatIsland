@@ -5,7 +5,7 @@ import React, { useEffect, useState } from "react";
 import styles from "../stylesBody.module.less";
 
 const DeliveryModal = ({ items, isOpen, onClose, countProduct, sumPrice }) => {
-  const [modalWidth, setModalWidth] = useState("40%"); // Начальная ширина модалки
+  const [modalWidth, setModalWidth] = useState("50%"); // Начальная ширина модалки
   const [form] = Form.useForm();
 
   const handleSubmit = (values) => {
@@ -18,8 +18,10 @@ const DeliveryModal = ({ items, isOpen, onClose, countProduct, sumPrice }) => {
         setModalWidth("90%");
       } else if (window.innerWidth <= 1200) {
         setModalWidth("80%");
+      } else if (window.innerWidth <= 1400) {
+        setModalWidth("70%");
       } else {
-        setModalWidth("40%");
+        setModalWidth("50%");
       }
     };
 
@@ -96,6 +98,9 @@ const DeliveryModal = ({ items, isOpen, onClose, countProduct, sumPrice }) => {
         </Form.Item>
 
         <Form.Item>
+          <div className={styles.titleBtnTop}>
+            Доставка осушествляеться только по городу Казань с 9:00 - 20:00
+          </div>
           <Button type="primary" htmlType="submit" className={styles.formBtn}>
             Оформить
           </Button>

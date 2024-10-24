@@ -32,27 +32,33 @@ const BurgerMenu = () => {
         <div className={styles.MenuContent}>
           <div
             className={styles.MenuItem}
-            onClick={() => handleNavigate("part-1")}
+            onClick={() => handleNavigate("part-0")}
           >
-            Главная
+            О нас
           </div>
           <div
             className={styles.MenuItem}
-            onClick={() => handleNavigate("part-2")}
+            onClick={() => handleNavigate("part-1")}
           >
             Отзывы
           </div>
           <div
             className={styles.MenuItem}
-            onClick={() => handleNavigate("part-3")}
+            onClick={() => handleNavigate("part-2")}
           >
-            Контакты
+            Наши магазины
           </div>
           <div
             className={styles.MenuItem}
             onClick={() => handleNavigate("part-3")}
           >
             Сертификаты
+          </div>
+          <div
+            className={styles.MenuItem}
+            onClick={() => handleNavigate("part-4")}
+          >
+            Контакты
           </div>
         </div>
       </div>

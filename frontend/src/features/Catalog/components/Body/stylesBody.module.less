@@ -14,6 +14,9 @@
 .categoryContainer{
     flex: 1 1 0;
     overflow: hidden;
+    h1{
+        padding: 40px;
+    }
 }
 
 .gridContainer {
@@ -94,8 +97,27 @@
 
 // search
 .catalogSearch {
-    margin-top: 10px;
-    border-color: rgba(0, 0, 0, 0.08) !important;
+    height: 40px;
+    /* width: 100%; */
+    position: relative;
+    right: 0;
+    border: none !important;
+    border-radius: none !important;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.08) !important;
+    background-color: transparent;
+}
+
+.catalogSearchContainer{
+    margin-left: 430px;
+    margin-right: 60px;
+    @media (max-width: 960px) {
+      text-align: center;
+      margin: 0 40px;
+    }
+    @media (max-width: 380px) {
+      text-align: center;
+      margin: 0 20px;
+    }
 }
 
 // Basket
@@ -117,9 +139,8 @@
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     padding: 15px;
     height: fit-content;
-    max-width: 350px;
-    min-width: 300px;
-    @media (max-width: 970px) {
+    width: 350px;
+    @media (max-width: 960px) {
       min-width: 100%;
     }
 }
@@ -210,7 +231,7 @@
 // Main Catalog
 
 .mainCatalogTitleBlock{
-    background-image: url(../../../../shared/assets/mainCatalogTitle.png);
+    background-image: url('https://meatisland.storage.yandexcloud.net/main_Catalog_Title_263808741b.png');
     background-size: cover;
     border-radius: 4px;
     height: fit-content;
@@ -366,8 +387,15 @@
     /* justify-content: center; */
 }
 
+.titleBtnTop{
+    /* text-align: center; */
+    color: rgba(0, 0, 0, 0.5);
+    font-size: 16px;
+    margin-bottom: 10px;
+}
+
 .deliveryForm{
-    padding: 10px 100px;
+    padding: 10px 70px;
     @media (max-width: 600px) {
         padding: 10px 50px;
     }

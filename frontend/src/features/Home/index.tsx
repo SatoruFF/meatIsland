@@ -33,13 +33,13 @@ export default function HomePage() {
       <div className={styles.reviews} id="part-1">
         <Reviews />
       </div>
-      <div className={styles.contacts}>
+      <div className={styles.contacts} id="part-2">
         <Maps />
       </div>
-      <div className={styles.contacts} id="part-2">
+      <div className={styles.contacts} id="part-3">
         <Certificates />
       </div>
-      <div id="part-3">
+      <div id="part-4">
         <Footer isMain={true} />
       </div>
     </React.Fragment>

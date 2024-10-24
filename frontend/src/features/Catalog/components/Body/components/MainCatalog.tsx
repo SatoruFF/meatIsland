@@ -9,7 +9,7 @@ const MainCatalog = () => {
         <div className={styles.mainCard}>
           <h2 className={styles.mainCardTitle}>
             <span className={styles.titleHalal}>Халяльное</span> фермерское мясо
-            и полуфабрикаты
+            и полуфабрикаты в Казани
           </h2>
           <p className={styles.mainCardDescriptions}>
             Cвежая и качественная продукция, соответствующая строгим стандартам.

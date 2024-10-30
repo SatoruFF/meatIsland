@@ -2,11 +2,11 @@ import { BrowserRouter } from "react-router-dom";
 import cn from "classnames";
 
 import AppRouter from "./AppRouter";
-import resetStyles from "../styles/reset.module.less";
+import "../styles/reset.css";
 
 function App() {
   return (
-    <div className={cn(resetStyles)}>
+    <div>
       <BrowserRouter>
         <AppRouter />
       </BrowserRouter>

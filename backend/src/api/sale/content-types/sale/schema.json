@@ -18,11 +18,30 @@
       "target": "api::product.product",
       "mappedBy": "sale"
     },
-    "SaleDate": {
+    "saleDate": {
       "type": "datetime"
     },
-    "TotalAmount": {
+    "totalAmount": {
       "type": "float"
+    },
+    "phone": {
+      "type": "string"
+    },
+    "deliveryMethod": {
+      "type": "enumeration",
+      "enum": [
+        "selfPickup",
+        "delivery"
+      ]
+    },
+    "address": {
+      "type": "text"
+    },
+    "floor": {
+      "type": "string"
+    },
+    "intercom": {
+      "type": "string"
     }
   }
 }

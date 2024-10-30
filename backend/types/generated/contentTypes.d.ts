@@ -888,8 +888,13 @@ export interface ApiSaleSale extends Schema.CollectionType {
       'oneToMany',
       'api::product.product'
     >;
-    SaleDate: Attribute.DateTime;
-    TotalAmount: Attribute.Float;
+    saleDate: Attribute.DateTime;
+    totalAmount: Attribute.Float;
+    phone: Attribute.String;
+    deliveryMethod: Attribute.Enumeration<['selfPickup', 'delivery']>;
+    address: Attribute.Text;
+    floor: Attribute.String;
+    intercom: Attribute.String;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     createdBy: Attribute.Relation<'api::sale.sale', 'oneToOne', 'admin::user'> &

@@ -5,6 +5,7 @@ export interface ISaleAttrs {
   address: string;
   floor: number | undefined;
   intercom: string | undefined;
+  products: string[]
 }
 
 export interface ISale {

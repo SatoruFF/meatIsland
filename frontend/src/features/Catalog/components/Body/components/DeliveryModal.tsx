@@ -5,17 +5,19 @@ import { useEffect, useState } from "react";
 import styles from "../stylesBody.module.less";
 import { ISaleAttrs } from "../../../../../Types/Sale";
 import { createSail } from "../../../../../services/saleService";
+import basketStore from "../../../../../store/storeBasket";
 
 const DeliveryModal = ({ items, isOpen, onClose, countProduct, sumPrice }) => {
   const [modalWidth, setModalWidth] = useState("50%");
   const [form] = Form.useForm();
+  const { basket } = basketStore();
 
   const handleSubmit = async (values: ISaleAttrs) => {
-    await createSail({ data: values })
+    await createSail({ data: _.assign(values, { products: _.keys(basket) }) });
   };
 
   useEffect(() => {
-    const handleResize = () => {s
+    const handleResize = () => {
       if (window.innerWidth <= 950) {
         setModalWidth("90%");
       } else if (window.innerWidth <= 1200) {
@@ -91,7 +93,13 @@ const DeliveryModal = ({ items, isOpen, onClose, countProduct, sumPrice }) => {
         </Form.Item>
 
         <Form.Item name="floor">
-          <InputNumber style={{width: "100%"}} min={1} max={300} className={styles.formInput} placeholder="Этаж" />
+          <InputNumber
+            style={{ width: "100%" }}
+            min={1}
+            max={300}
+            className={styles.formInput}
+            placeholder="Этаж"
+          />
         </Form.Item>
 
         <Form.Item name="intercom">

@@ -1,19 +1,21 @@
 import _ from "lodash";
-import { Modal, Form, Input, Radio, Button } from "antd";
-import React, { useEffect, useState } from "react";
+import { Modal, Form, Input, Radio, Button, InputNumber } from "antd";
+import { useEffect, useState } from "react";
 
 import styles from "../stylesBody.module.less";
+import { ISaleAttrs } from "../../../../../Types/Sale";
+import { createSail } from "../../../../../services/saleService";
 
 const DeliveryModal = ({ items, isOpen, onClose, countProduct, sumPrice }) => {
-  const [modalWidth, setModalWidth] = useState("50%"); // Начальная ширина модалки
+  const [modalWidth, setModalWidth] = useState("50%");
   const [form] = Form.useForm();
 
-  const handleSubmit = (values) => {
-    console.log(values);
+  const handleSubmit = async (values: ISaleAttrs) => {
+    await createSail({ data: values })
   };
 
   useEffect(() => {
-    const handleResize = () => {
+    const handleResize = () => {s
       if (window.innerWidth <= 950) {
         setModalWidth("90%");
       } else if (window.innerWidth <= 1200) {
@@ -25,7 +27,6 @@ const DeliveryModal = ({ items, isOpen, onClose, countProduct, sumPrice }) => {
       }
     };
 
-    handleResize();
     window.addEventListener("resize", handleResize);
 
     // Очистка обработчика события при размонтировании компонента
@@ -90,7 +91,7 @@ const DeliveryModal = ({ items, isOpen, onClose, countProduct, sumPrice }) => {
         </Form.Item>
 
         <Form.Item name="floor">
-          <Input className={styles.formInput} placeholder="Этаж" />
+          <InputNumber style={{width: "100%"}} min={1} max={300} className={styles.formInput} placeholder="Этаж" />
         </Form.Item>
 
         <Form.Item name="intercom">

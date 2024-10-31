@@ -42,6 +42,9 @@
     },
     "intercom": {
       "type": "string"
+    },
+    "name": {
+      "type": "string"
     }
   }
 }

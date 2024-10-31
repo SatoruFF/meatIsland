@@ -91,17 +91,9 @@ const DeliveryModal = ({ items, isOpen, onClose, countProduct, sumPrice }) => {
             placeholder="Адрес (улица, дом, квартира)"
           />
         </Form.Item>
-
         <Form.Item name="floor">
-          <InputNumber
-            style={{ width: "100%" }}
-            min={1}
-            max={300}
-            className={styles.formInput}
-            placeholder="Этаж"
-          />
+          <Input className={styles.formInput} placeholder="Этаж" />
         </Form.Item>
-
         <Form.Item name="intercom">
           <Input className={styles.formInput} placeholder="Домофон" />
         </Form.Item>

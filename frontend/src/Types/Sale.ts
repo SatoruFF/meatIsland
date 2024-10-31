@@ -3,9 +3,9 @@ export interface ISaleAttrs {
   phone: string;
   deliveryMethod: "selfPickup" | "delivery";
   address: string;
-  floor: number | undefined;
+  floor: string | undefined;
   intercom: string | undefined;
-  products: string[]
+  products: string[];
 }
 
 export interface ISale {

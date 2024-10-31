@@ -7,33 +7,46 @@ module.exports = {
     const chatId = process.env.CHAT_ID;
     const token = process.env.TOKEN_TG;
 
-    // Получаем список ID продуктов
-    const productIds = result.products;
-
-    // Запрашиваем детали каждого продукта по его ID
-    const productDetails = await Promise.all(
-      productIds.map(async (id) => {
-        const product = await strapi.query("product").findOne({ id });
-        return product ? product.name : `Товар ID ${id}`;
-      })
-    );
+    if (!chatId || !token) {
+      console.error("Ошибка: CHAT_ID или TOKEN_TG не определены.");
+      return;
+    }
+    const productsList = result.products
+      .map(
+        (product, i) =>
+          `${i + 1}. ${product.name} - ${product.price} руб. Кол-во: ${
+            product.weight ? product.weight : 1
+          }`
+      )
+      .join("\n\n");
 
     const message = `
-   📦 Новый заказ на Мясном острове!
+    📦 Новый заказ на Мясном острове!
 
-   Имя клиента: ${result.name}
-   Телефон: ${result.phone}
-   Метод доставки: ${result.deliveryMethod}
-   Адрес: ${result.address}, этаж: ${result.floor}, домофон: ${result.intercom}
+👤 Имя клиента: ${result.name}
+📞 Телефон: ${result.phone}
+🚚 Метод доставки: ${
+      result.deliveryMethod === "delivery" ? "Доставка" : "Самовызов"
+    }
+📍 Адрес: ${result.address} ${result.floor ? ` этаж: ${result.floor}` : ""} ${
+      result.intercom ? ` домофон: ${result.intercom}` : ""
+    }
 
-   🛒 Продукты:
-   ${productDetails.join("\n")}
-       `;
+🛒 Продукты:
 
-    // Отправляем сообщение в Telegram
-    await axios.post(`https://api.telegram.org/bot${token}/sendMessage`, {
-      chat_id: chatId,
-      text: message,
-    });
+${productsList}
+        `;
+
+    try {
+      await axios.post(`https://api.telegram.org/bot${token}/sendMessage`, {
+        chat_id: chatId,
+        text: message.trim(),
+      });
+    } catch (error) {
+      console.error(
+        "Ошибка при отправке сообщения в Telegram:",
+        error.response?.data || error.message
+      );
+    }
   },
 };

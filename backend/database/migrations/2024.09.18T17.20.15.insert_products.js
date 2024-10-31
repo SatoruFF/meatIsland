@@ -321,51 +321,50 @@ const products = [
 
 module.exports = {
   async up() {
-    await strapi.db.transaction(async () => {
-      const categoryMap = {};
-      for (let category of categories) {
-        let existingCategory = await strapi.db
-          .query("api::category.category")
-          .findOne({ where: { name: category.name } });
-        if (!existingCategory) {
-          const createdCategory = await strapi.db
-            .query("api::category.category")
-            .create({
-              data: {
-                name: category.name,
-              },
-            });
-          categoryMap[category.id] = createdCategory.id;
-        } else {
-          categoryMap[category.id] = existingCategory.id;
-        }
-      }
-      console.log("Categories were inserted into db");
-
-      for (let product of products) {
-        let existingProduct = await strapi.db
-          .query("api::product.product")
-          .findOne({
-            where: {
-              name: product.name,
-            },
-          });
-        if (!existingProduct) {
-          await strapi.db.query("api::product.product").create({
-            data: {
-              name: product.name,
-              trade_price: product.trade_price,
-              price: product.price,
-              available: product.available,
-              category: categoryMap[product.category],
-              description: product.description,
-            },
-          });
-        } else {
-          console.log(`Product "${product.name}" already exists, skipping.`);
-        }
-      }
-      console.log("Products were inserted into db");
-    });
+    // await strapi.db.transaction(async () => {
+    //   const categoryMap = {};
+    //   for (let category of categories) {
+    //     let existingCategory = await strapi.db
+    //       .query("api::category.category")
+    //       .findOne({ where: { name: category.name } });
+    //     if (!existingCategory) {
+    //       const createdCategory = await strapi.db
+    //         .query("api::category.category")
+    //         .create({
+    //           data: {
+    //             name: category.name,
+    //           },
+    //         });
+    //       categoryMap[category.id] = createdCategory.id;
+    //     } else {
+    //       categoryMap[category.id] = existingCategory.id;
+    //     }
+    //   }
+    //   console.log("Categories were inserted into db");
+    //   // for (let product of products) {
+    //   //   let existingProduct = await strapi.db
+    //   //     .query("api::product.product")
+    //   //     .findOne({
+    //   //       where: {
+    //   //         name: product.name,
+    //   //       },
+    //   //     });
+    //   //   if (!existingProduct) {
+    //   //     await strapi.db.query("api::product.product").create({
+    //   //       data: {
+    //   //         name: product.name,
+    //   //         trade_price: product.trade_price,
+    //   //         price: product.price,
+    //   //         available: product.available,
+    //   //         category: categoryMap[product.category],
+    //   //         description: product.description,
+    //   //       },
+    //   //     });
+    //   //   } else {
+    //   //     console.log(`Product "${product.name}" already exists, skipping.`);
+    //   //   }
+    //   // }
+    //   console.log("Products were inserted into db");
+    // });
   },
 };

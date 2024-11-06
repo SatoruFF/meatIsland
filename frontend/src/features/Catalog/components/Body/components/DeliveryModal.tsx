@@ -13,7 +13,13 @@ const DeliveryModal = ({ items, isOpen, onClose, countProduct, sumPrice }) => {
   const { basket } = basketStore();
 
   const handleSubmit = async (values: ISaleAttrs) => {
-    await createSail({ data: _.assign(values, { products: _.keys(basket) }) });
+    await createSail({
+      data: _.assign(values, {
+        products: Array.isArray(basket)
+          ? basket.map((i) => i.id)
+          : _.keys(basket),
+      }),
+    }); // TODO: удалить это стремный костыль
   };
 
   useEffect(() => {

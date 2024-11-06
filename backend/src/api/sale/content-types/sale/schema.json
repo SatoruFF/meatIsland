@@ -15,8 +15,8 @@
     "products": {
       "type": "relation",
       "relation": "oneToMany",
-      "target": "api::product.product",
-      "mappedBy": "sale"
+      "target": "api::order-product.order-product",
+      "mappedBy": "order"
     },
     "saleDate": {
       "type": "datetime"

@@ -1,0 +1,30 @@
+{
+  "kind": "collectionType",
+  "collectionName": "order_products",
+  "info": {
+    "singularName": "order-product",
+    "pluralName": "order-products",
+    "displayName": "Свойства заказа",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": false
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "quantity": {
+      "type": "float"
+    },
+    "product": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::product.product"
+    },
+    "order": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::sale.sale",
+      "inversedBy": "products"
+    }
+  }
+}

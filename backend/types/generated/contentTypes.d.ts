@@ -823,6 +823,46 @@ export interface ApiCategoryCategory extends Schema.CollectionType {
   };
 }
 
+export interface ApiOrderProductOrderProduct extends Schema.CollectionType {
+  collectionName: 'order_products';
+  info: {
+    singularName: 'order-product';
+    pluralName: 'order-products';
+    displayName: '\u0421\u0432\u043E\u0439\u0441\u0442\u0432\u0430 \u0437\u0430\u043A\u0430\u0437\u0430';
+    description: '';
+  };
+  options: {
+    draftAndPublish: false;
+  };
+  attributes: {
+    quantity: Attribute.Float;
+    product: Attribute.Relation<
+      'api::order-product.order-product',
+      'oneToOne',
+      'api::product.product'
+    >;
+    order: Attribute.Relation<
+      'api::order-product.order-product',
+      'manyToOne',
+      'api::sale.sale'
+    >;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::order-product.order-product',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::order-product.order-product',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
 export interface ApiProductProduct extends Schema.CollectionType {
   collectionName: 'products';
   info: {
@@ -847,11 +887,6 @@ export interface ApiProductProduct extends Schema.CollectionType {
     >;
     image: Attribute.Media<'images' | 'files' | 'videos' | 'audios', true>;
     StockQuantity: Attribute.Integer;
-    sale: Attribute.Relation<
-      'api::product.product',
-      'manyToOne',
-      'api::sale.sale'
-    >;
     tradePrice: Attribute.Float;
     recommendation: Attribute.Boolean & Attribute.DefaultTo<false>;
     createdAt: Attribute.DateTime;
@@ -886,7 +921,7 @@ export interface ApiSaleSale extends Schema.CollectionType {
     products: Attribute.Relation<
       'api::sale.sale',
       'oneToMany',
-      'api::product.product'
+      'api::order-product.order-product'
     >;
     saleDate: Attribute.DateTime;
     totalAmount: Attribute.Float;
@@ -924,6 +959,7 @@ declare module '@strapi/types' {
       'plugin::users-permissions.role': PluginUsersPermissionsRole;
       'plugin::users-permissions.user': PluginUsersPermissionsUser;
       'api::category.category': ApiCategoryCategory;
+      'api::order-product.order-product': ApiOrderProductOrderProduct;
       'api::product.product': ApiProductProduct;
       'api::sale.sale': ApiSaleSale;
     }

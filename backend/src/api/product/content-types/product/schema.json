@@ -47,12 +47,6 @@
     "StockQuantity": {
       "type": "integer"
     },
-    "sale": {
-      "type": "relation",
-      "relation": "manyToOne",
-      "target": "api::sale.sale",
-      "inversedBy": "products"
-    },
     "tradePrice": {
       "type": "float"
     },

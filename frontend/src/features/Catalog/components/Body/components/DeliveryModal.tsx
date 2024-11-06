@@ -16,8 +16,12 @@ const DeliveryModal = ({ items, isOpen, onClose, countProduct, sumPrice }) => {
     await createSail({
       data: _.assign(values, {
         products: Array.isArray(basket)
-          ? basket.map((i) => i.id)
-          : _.keys(basket),
+          ? basket.map((i) => {
+              return { product: i.id, quantity: i.quantity };
+            })
+          : _.keys(basket).map((i) => {
+              return { product: i.id, quantity: i.quantity };
+            }),
       }),
     }); // TODO: удалить это стремный костыль
   };

@@ -13,14 +13,16 @@ const DeliveryModal = ({ items, isOpen, onClose, countProduct, sumPrice }) => {
   const { basket } = basketStore();
 
   const handleSubmit = async (values: ISaleAttrs) => {
+    console.log(3243, basket);
+    
     await createSail({
       data: _.assign(values, {
         products: Array.isArray(basket)
           ? basket.map((i) => {
               return { product: i.id, quantity: i.quantity };
             })
-          : _.keys(basket).map((i) => {
-              return { product: i.id, quantity: i.quantity };
+          : _.map(basket, (item, id) => {
+              return { product: id, quantity: item.quantity };
             }),
       }),
     }); // TODO: удалить это стремный костыль

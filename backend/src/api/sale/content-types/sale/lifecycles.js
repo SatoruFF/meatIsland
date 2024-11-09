@@ -11,32 +11,52 @@ module.exports = {
       console.error("Ошибка: CHAT_ID или TOKEN_TG не определены.");
       return;
     }
-    const productsList = result.products
-      .map(
-        (product, i) =>
-          `${i + 1}. ${product.name} - ${product.price} руб. Кол-во: ${
-            product.weight ? product.weight : 1
-          }`
-      )
+
+    const orderProducts = await strapi.entityService.findMany(
+      "api::order-product.order-product",
+      {
+        filters: {
+          product: result.id,
+        },
+        populate: ["product"],
+      }
+    );
+
+    let totalAmount = 0;
+
+    // Формируем список продуктов и рассчитываем общую сумму
+    const productsList = orderProducts
+      .map((product, i) => {
+        const productTotal = product.product.price * product.quantity;
+        totalAmount += productTotal;
+
+        return `${i + 1}. ${product.product.name} - ${
+          product.product.price
+        } руб. Кол-во: ${product.quantity} (Сумма: ${productTotal} руб.)`;
+      })
       .join("\n\n");
 
+    // Формируем сообщение
     const message = `
-    📦 Новый заказ на Мясном острове!
+📦 Новый заказ на Мясном острове!
 
 👤 Имя клиента: ${result.name}
 📞 Телефон: ${result.phone}
 🚚 Метод доставки: ${
-      result.deliveryMethod === "delivery" ? "Доставка" : "Самовызов"
+      result.deliveryMethod === "delivery" ? "Доставка" : "Самовывоз"
     }
-📍 Адрес: ${result.address} ${result.floor ? ` этаж: ${result.floor}` : ""} ${
-      result.intercom ? ` домофон: ${result.intercom}` : ""
-    }
+📍 Адрес: ${result.address} ${
+      result.floor ? ` этаж: ${result.floor}` : ""
+    } ${result.intercom ? ` Домофон: ${result.intercom}` : ""}
 
 🛒 Продукты:
 
 ${productsList}
-        `;
 
+💵 Общая сумма заказа: ${totalAmount} руб.
+`;
+
+    // Отправляем сообщение в Telegram
     try {
       await axios.post(`https://api.telegram.org/bot${token}/sendMessage`, {
         chat_id: chatId,

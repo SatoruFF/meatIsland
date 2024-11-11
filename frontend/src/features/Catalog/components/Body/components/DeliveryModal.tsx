@@ -7,6 +7,8 @@ import { ISaleAttrs } from "../../../../../Types/Sale";
 import { createSail } from "../../../../../services/saleService";
 import basketStore from "../../../../../store/storeBasket";
 
+const { TextArea } = Input;
+
 const DeliveryModal = ({ items, isOpen, onClose, countProduct, sumPrice }) => {
   const [modalWidth, setModalWidth] = useState("50%");
   const [form] = Form.useForm();
@@ -26,7 +28,9 @@ const DeliveryModal = ({ items, isOpen, onClose, countProduct, sumPrice }) => {
         }),
       }); // TODO: удалить это стремный костыль
     } catch (error) {
-      message.error(`Что то пошло не так при оформлении заказа, текст ошибки: ${error.message}}`)
+      message.error(
+        `Что то пошло не так при оформлении заказа, текст ошибки: ${error.message}}`
+      );
     }
   };
 
@@ -110,6 +114,14 @@ const DeliveryModal = ({ items, isOpen, onClose, countProduct, sumPrice }) => {
         </Form.Item>
         <Form.Item name="intercom">
           <Input className={styles.formInput} placeholder="Домофон" />
+        </Form.Item>
+
+        <Form.Item name="comment">
+          <TextArea
+            rows={4}
+            className={styles.formInput}
+            placeholder="Комментарий к заказу"
+          />
         </Form.Item>
 
         <Form.Item>

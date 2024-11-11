@@ -49,6 +49,8 @@ module.exports = {
       result.intercom ? ` Домофон: ${result.intercom}` : ""
     }
 
+💬 Комментарий: ${result.comment || "Нет комментария"}
+
 🛒 Продукты:
 
 ${productsList}

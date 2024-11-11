@@ -931,6 +931,7 @@ export interface ApiSaleSale extends Schema.CollectionType {
     floor: Attribute.String;
     intercom: Attribute.String;
     name: Attribute.String;
+    comment: Attribute.Text;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     createdBy: Attribute.Relation<'api::sale.sale', 'oneToOne', 'admin::user'> &

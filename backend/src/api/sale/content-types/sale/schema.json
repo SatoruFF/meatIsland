@@ -45,6 +45,9 @@
     },
     "name": {
       "type": "string"
+    },
+    "comment": {
+      "type": "text"
     }
   }
 }

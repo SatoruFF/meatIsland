@@ -16,7 +16,7 @@ module.exports = {
       "api::order-product.order-product",
       {
         filters: {
-          product: result.id,
+          order: result.id,
         },
         populate: ["product"],
       }
@@ -45,9 +45,9 @@ module.exports = {
 🚚 Метод доставки: ${
       result.deliveryMethod === "delivery" ? "Доставка" : "Самовывоз"
     }
-📍 Адрес: ${result.address} ${
-      result.floor ? ` этаж: ${result.floor}` : ""
-    } ${result.intercom ? ` Домофон: ${result.intercom}` : ""}
+📍 Адрес: ${result.address} ${result.floor ? ` этаж: ${result.floor}` : ""} ${
+      result.intercom ? ` Домофон: ${result.intercom}` : ""
+    }
 
 🛒 Продукты:
 

@@ -1,5 +1,5 @@
 import _ from "lodash";
-import { Modal, Form, Input, Radio, Button, InputNumber } from "antd";
+import { Modal, Form, Input, Radio, Button, message } from "antd";
 import { useEffect, useState } from "react";
 
 import styles from "../stylesBody.module.less";
@@ -13,19 +13,21 @@ const DeliveryModal = ({ items, isOpen, onClose, countProduct, sumPrice }) => {
   const { basket } = basketStore();
 
   const handleSubmit = async (values: ISaleAttrs) => {
-    console.log(3243, basket);
-    
-    await createSail({
-      data: _.assign(values, {
-        products: Array.isArray(basket)
-          ? basket.map((i) => {
-              return { product: i.id, quantity: i.quantity };
-            })
-          : _.map(basket, (item, id) => {
-              return { product: id, quantity: item.quantity };
-            }),
-      }),
-    }); // TODO: удалить это стремный костыль
+    try {
+      await createSail({
+        data: _.assign(values, {
+          products: Array.isArray(basket)
+            ? basket.map((i) => {
+                return { product: i.id, quantity: i.quantity };
+              })
+            : _.map(basket, (item, id) => {
+                return { product: id, quantity: item.quantity };
+              }),
+        }),
+      }); // TODO: удалить это стремный костыль
+    } catch (error) {
+      message.error(`Что то пошло не так при оформлении заказа, текст ошибки: ${error.message}}`)
+    }
   };
 
   useEffect(() => {

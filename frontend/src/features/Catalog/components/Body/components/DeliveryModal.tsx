@@ -1,5 +1,5 @@
 import _ from "lodash";
-import { Modal, Form, Input, Radio, Button, message } from "antd";
+import { Modal, Form, Input, Radio, Button, message, Checkbox } from "antd";
 import { useEffect, useState } from "react";
 
 import styles from "../stylesBody.module.less";
@@ -33,11 +33,11 @@ const DeliveryModal = ({ items, isOpen, onClose, countProduct, sumPrice }) => {
                 return { product: id, quantity: item.quantity };
               }),
         }),
-      }); // TODO: удалить это стремный костыль
+      }); // TODO: удалить этот стремный костыль
       setSuccessfulOrder(true);
     } catch (error) {
       message.error(
-        `Что то пошло не так при оформлении заказа, текст ошибки: ${error.message}}`
+        `Что-то пошло не так при оформлении заказа, текст ошибки: ${error.message}`
       );
     }
   };
@@ -84,7 +84,10 @@ const DeliveryModal = ({ items, isOpen, onClose, countProduct, sumPrice }) => {
           form={form}
           onFinish={handleSubmit}
           className={styles.deliveryForm}
-          initialValues={{ deliveryMethod: "delivery" }}
+          initialValues={{
+            deliveryMethod: "delivery",
+            agreeToTerms: false,
+          }}
         >
           <Form.Item
             className={styles.formInputContainer}
@@ -140,9 +143,30 @@ const DeliveryModal = ({ items, isOpen, onClose, countProduct, sumPrice }) => {
             />
           </Form.Item>
 
+          <Form.Item
+            name="agreeToTerms"
+            valuePropName="checked"
+            rules={[
+              {
+                validator: (_, value) =>
+                  value
+                    ? Promise.resolve()
+                    : Promise.reject(
+                        new Error(
+                          "Вы должны согласиться на обработку персональных данных!"
+                        )
+                      ),
+              },
+            ]}
+          >
+            <Checkbox className={styles.checkbox}>
+              Я соглашаюсь на обработку персональных данных
+            </Checkbox>
+          </Form.Item>
+
           <Form.Item>
             <div className={styles.titleBtnTop}>
-              Доставка осушествляеться только по городу Казань с 9:00 - 20:00
+              Доставка осуществляется только по городу Казань с 9:00 - 20:00
             </div>
             <div className={styles.titleBtnTop}>
               При сумме заказа более 10 000 рублей начисляется скидка на

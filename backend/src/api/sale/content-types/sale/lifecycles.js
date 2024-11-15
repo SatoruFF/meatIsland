@@ -51,7 +51,7 @@ module.exports = {
 
         // Проверяем категорию
         const isSemiFinished = product.category?.name === "Полуфабрикаты";
-        const discountRate = isSemiFinished ? 0.85 : 0.80; // 15% или 20%
+        const discountRate = isSemiFinished ? 0.80 : 0.85; // 15% или 20%
         const productTotalWithSale =
           totalAmount > optSale ? productTotal * discountRate : productTotal;
 

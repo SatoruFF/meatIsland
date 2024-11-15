@@ -144,6 +144,10 @@ const DeliveryModal = ({ items, isOpen, onClose, countProduct, sumPrice }) => {
             <div className={styles.titleBtnTop}>
               Доставка осушествляеться только по городу Казань с 9:00 - 20:00
             </div>
+            <div className={styles.titleBtnTop}>
+              При сумме заказа более 10 000 рублей начисляется скидка на
+              полуфабрикаты в размере 20%, а на остальные товары 15%
+            </div>
             <Button type="primary" htmlType="submit" className={styles.formBtn}>
               Оформить
             </Button>

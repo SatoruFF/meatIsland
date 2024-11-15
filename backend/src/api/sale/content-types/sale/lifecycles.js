@@ -1,5 +1,7 @@
 const axios = require("axios");
 
+const optSale = 10000
+
 module.exports = {
   async afterCreate(event) {
     const { result } = event;
@@ -24,15 +26,44 @@ module.exports = {
 
     let totalAmount = 0;
 
-    // Формируем список продуктов и рассчитываем общую сумму
+      let totalAmountWithSale = 0
+
+    // Получаем категории продуктов
+    for (const orderProduct of orderProducts) {
+      const { product } = orderProduct;
+
+      // Делаем запрос для получения категории текущего продукта
+      const productDetails = await strapi.entityService.findOne(
+        "api::product.product",
+        product.id,
+        { populate: ["category"] }
+      );
+
+      // Добавляем категорию в объект продукта
+      orderProduct.product.category = productDetails.category;
+    }
+
     const productsList = orderProducts
-      .map((product, i) => {
-        const productTotal = product.product.price * product.quantity;
+      .map((orderProduct, i) => {
+        const { product, quantity } = orderProduct;
+        const productTotal = product.price * quantity;
         totalAmount += productTotal;
 
-        return `${i + 1}. ${product.product.name} - ${
-          product.product.price
-        } руб. Кол-во: ${product.quantity} (Сумма: ${productTotal} руб.)`;
+        // Проверяем категорию
+        const isSemiFinished = product.category?.name === "Полуфабрикаты";
+        const discountRate = isSemiFinished ? 0.85 : 0.80; // 15% или 20%
+        const productTotalWithSale =
+          totalAmount > optSale ? productTotal * discountRate : productTotal;
+
+        totalAmountWithSale += productTotalWithSale;
+
+        return `${i + 1}. ${product.name} - ${product.price} руб. Кол-во: ${
+          quantity
+        } (Сумма: ${productTotal} руб.) ${
+          totalAmount > optSale
+            ? `(Со скидкой: ${productTotalWithSale.toFixed(2)} руб.)`
+            : ""
+        }`;
       })
       .join("\n\n");
 

@@ -168,6 +168,14 @@ const DeliveryModal = ({ items, isOpen, onClose, countProduct, sumPrice }) => {
             <div className={styles.titleBtnTop}>
               Доставка осуществляется только по городу Казань с 9:00 - 20:00
             </div>
+            <div>
+              Цена доставки:
+              <p>От 0 - 1000р = 300р </p>
+              <p>От 1000 - 2000 = 199р </p>
+              <p>От 2000 -4000 = 150р </p>
+              <p>От 4000 бесплатно</p>
+            </div>
+
             <div className={styles.titleBtnTop}>
               При сумме заказа более 10 000 рублей начисляется скидка на
               полуфабрикаты в размере 20%, а на остальные товары 15%

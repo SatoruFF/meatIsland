@@ -38,7 +38,7 @@ module.exports = createCoreController("api::sale.sale", ({ strapi }) => ({
               },
             }
           );
-          
+
           orderProducts.push(orderProduct);
           validatedProducts.push(orderProduct.id);
         } else {
